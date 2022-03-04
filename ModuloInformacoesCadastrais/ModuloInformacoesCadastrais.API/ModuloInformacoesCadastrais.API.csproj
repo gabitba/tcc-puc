@@ -6,6 +6,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>d420cfdc-b975-4000-92c8-127d9c3ca9c3</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModuloInformacoesCadastrais.Application\ModuloInformacoesCadastrais.Application.csproj" />
+    <ProjectReference Include="..\ModuloInformacoesCadastrais.CrossCutting\ModuloInformacoesCadastrais.CrossCutting.csproj" />
+    <ProjectReference Include="..\ModuloInformacoesCadastrais.Domain\ModuloInformacoesCadastrais.Domain.csproj" />
+    <ProjectReference Include="..\ModuloInformacoesCadastrais.Infrastructure\ModuloInformacoesCadastrais.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
