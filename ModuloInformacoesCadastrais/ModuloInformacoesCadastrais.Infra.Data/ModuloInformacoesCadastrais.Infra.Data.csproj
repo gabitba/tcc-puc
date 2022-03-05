@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ModuloInformacoesCadastrais.Domain\ModuloInformacoesCadastrais.Domain.csproj" />
   </ItemGroup>
 
