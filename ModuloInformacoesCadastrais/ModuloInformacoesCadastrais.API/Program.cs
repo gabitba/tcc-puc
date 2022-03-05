@@ -5,10 +5,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-Host.CreateDefaultBuilder(args)
-    .ConfigureServices((_, services) => DependencyContainer.ConfigureServices(services))
-    .Build()
-    .RunAsync();
+DependencyContainer.ConfigureServices(builder.Services);
 
 builder.Services.AddControllers();
 

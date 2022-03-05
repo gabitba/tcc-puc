@@ -6,9 +6,9 @@ namespace ModuloInformacoesCadastrais.Infrastructure
 {
     public static class DependencyContainer
     {
-        public static void ConfigureServices(this IServiceCollection serviceCollection)
+        public static void ConfigureServices(IServiceCollection services)
         {
-            serviceCollection.AddSingleton<IClienteRepository, ClienteRepository>();
+            services.AddSingleton<IClienteRepository, ClienteRepository>();
         }
     }
 }
