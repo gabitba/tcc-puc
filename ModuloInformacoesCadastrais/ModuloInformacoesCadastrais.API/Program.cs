@@ -5,7 +5,7 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-DependencyContainer.ConfigureServices(builder.Services);
+InjetorDeDependencias.ConfigurarServicos(builder.Services);
 
 builder.Services.AddControllers();
 

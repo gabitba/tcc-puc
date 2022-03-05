@@ -8,6 +8,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<NoWarn>$(NoWarn);1591</NoWarn>
+	<DisableTransitiveProjectReferences>true</DisableTransitiveProjectReferences>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,9 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModuloInformacoesCadastrais.CrossCutting\ModuloInformacoesCadastrais.CrossCutting.csproj" />
-    <ProjectReference Include="..\ModuloInformacoesCadastrais.Domain\ModuloInformacoesCadastrais.Domain.csproj" />
-    <ProjectReference Include="..\ModuloInformacoesCadastrais.Infrastructure\ModuloInformacoesCadastrais.Infrastructure.IoC.csproj" />
+    <ProjectReference Include="..\ModuloInformacoesCadastrais.Application\ModuloInformacoesCadastrais.Application.csproj" />
+    <ProjectReference Include="..\ModuloInformacoesCadastrais.Infrastructure\ModuloInformacoesCadastrais.Infra.IoC.csproj" />
   </ItemGroup>
 
 </Project>
