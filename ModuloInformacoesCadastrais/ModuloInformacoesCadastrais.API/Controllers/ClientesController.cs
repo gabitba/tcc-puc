@@ -48,7 +48,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <returns>Cliente.</returns>
         /// <response code="200">Retorna o cliente cadastrado.</response>
         /// <response code="404">Cliente não encontrado.</response>
-        [HttpGet("{id}")]
+        [HttpGet("{idCliente}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [Produces("application/json")]
@@ -79,7 +79,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Produces("application/json")]
-        public async Task<ActionResult<int>> CadastrarClienteAsync([FromBody] CadastrarClienteModel novoCliente)
+        public async Task<ActionResult<CadastrarClienteResponseModel>> CadastrarClienteAsync([FromBody] CadastrarClienteRequestModel novoCliente)
         {
             if(novoCliente == null)
             {
@@ -94,7 +94,10 @@ namespace ModuloInformacoesCadastrais.API.Controllers
 
             var idCliente = await clientesServico.CadastrarClienteAsync(novoClienteDTO);
 
-            return Ok(idCliente);
+            return Ok(new CadastrarClienteResponseModel
+            {
+                id = idCliente,
+            });
         }
 
         /// <summary>
@@ -103,7 +106,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <response code="200">Retorna o id do cliente removido.</response>
         /// <response code="400">Falta id de cliente.</response>
         /// <response code="404">Cliente inexistente.</response>
-        [HttpDelete("{id}")]
+        [HttpDelete("{idCliente}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]

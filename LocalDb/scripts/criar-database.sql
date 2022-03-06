@@ -1,15 +1,15 @@
-IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'info_cadastrais')
+IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'InfoCadastrais')
 BEGIN
-  CREATE DATABASE info_cadastrais;
+  CREATE DATABASE InfoCadastrais;
 END;
 GO
 
-USE info_cadastrais;
+USE InfoCadastrais;
 GO
 
-IF OBJECT_ID('clientes', 'U') IS NULL
+IF OBJECT_ID('Clientes', 'U') IS NULL
 BEGIN
-  CREATE TABLE dbo.clientes
+  CREATE TABLE dbo.Clientes
   (
     Id   INT PRIMARY KEY IDENTITY(1, 1)
   , Nome VARCHAR(100)
