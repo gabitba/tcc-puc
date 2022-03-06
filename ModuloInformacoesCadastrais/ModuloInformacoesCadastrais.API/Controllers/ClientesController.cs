@@ -75,7 +75,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <returns>Id do cliente cadastrado.</returns>
         /// <response code="200">Retorna o id do cliente cadastrado.</response>
         /// <response code="400">Falta dados para cadastro de cliente.</response>
-        [HttpGet("{id}")]
+        [HttpPost]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Produces("application/json")]
@@ -103,12 +103,12 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <response code="200">Retorna o id do cliente removido.</response>
         /// <response code="400">Falta id de cliente.</response>
         /// <response code="404">Cliente inexistente.</response>
-        [HttpGet("{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
         [Produces("application/json")]
-        public async Task<ActionResult> CadastrarClienteAsync([FromRoute]int idCliente)
+        public async Task<ActionResult> RemoverClienteAsync([FromRoute]int idCliente)
         {
             if (idCliente == 0)
             {
