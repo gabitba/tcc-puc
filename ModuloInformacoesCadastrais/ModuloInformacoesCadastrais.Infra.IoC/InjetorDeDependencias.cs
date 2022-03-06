@@ -7,7 +7,7 @@ using ModuloInformacoesCadastrais.Domain.Interfaces;
 using ModuloInformacoesCadastrais.Domain.Repositorios;
 using ModuloInformacoesCadastrais.Infra.Data.Context;
 
-namespace ModuloInformacoesCadastrais.Infrastructure
+namespace ModuloInformacoesCadastrais.Infra.IoC
 {
     public static class InjetorDeDependencias
     {

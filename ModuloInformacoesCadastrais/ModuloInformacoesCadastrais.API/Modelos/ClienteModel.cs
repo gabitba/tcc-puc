@@ -6,6 +6,6 @@
 
         public string Nome { get; internal set; }
 
-        public object Endereco { get; internal set; }
+        public string Endereco { get; internal set; }
     }
 }
