@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ModuloInformacoesCadastrais.Application\ModuloInformacoesCadastrais.Application.csproj" />
+    <ProjectReference Include="..\ModuloInformacoesCadastrais.Infra.Data\ModuloInformacoesCadastrais.Infra.Data.csproj" />
     <ProjectReference Include="..\ModuloInformacoesCadastrais.Infrastructure\ModuloInformacoesCadastrais.Infra.IoC.csproj" />
   </ItemGroup>
 

@@ -1,10 +1,12 @@
 using Microsoft.OpenApi.Models;
+using ModuloInformacoesCadastrais.Infra.Data.Database;
 using ModuloInformacoesCadastrais.Infrastructure;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-InjetorDeDependencias.ConfigurarServicos(builder.Services);
+// Injeção de dependências.
+InjetorDeDependencias.ConfigurarDependencias(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -27,6 +29,14 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 var app = builder.Build();
+
+// Preencher dados iniciais da PoC.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.PreencherDados(services);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

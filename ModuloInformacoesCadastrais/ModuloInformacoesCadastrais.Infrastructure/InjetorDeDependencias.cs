@@ -1,16 +1,24 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using ModuloInformacoesCadastrais.Application.Interfaces;
 using ModuloInformacoesCadastrais.Application.Servicos;
 using ModuloInformacoesCadastrais.Domain.Interfaces;
 using ModuloInformacoesCadastrais.Domain.Repositorios;
+using ModuloInformacoesCadastrais.Infra.Data.Context;
 
 namespace ModuloInformacoesCadastrais.Infrastructure
 {
     public static class InjetorDeDependencias
     {
-        public static void ConfigurarServicos(IServiceCollection servicos)
+        public static void ConfigurarDependencias(IServiceCollection servicos, IConfiguration configuration)
         {
-            servicos.AddSingleton<IClientesRepositorio, ClientesRepositorio>();
+            servicos.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(configuration.GetConnectionString("InformacoesCadastrais"));
+            });
+
+            servicos.AddScoped<IClientesRepositorio, ClientesRepositorio>();
             servicos.AddScoped<IClientesServico, ClientesServicos>();
         }
     }
