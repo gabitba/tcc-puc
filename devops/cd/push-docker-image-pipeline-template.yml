@@ -1,0 +1,17 @@
+trigger: none
+
+pool: TCC-PUC Agent Pool
+
+steps:
+- task: Docker@2
+  displayName: Logando no Docker Hub
+  inputs:
+    command: login
+    containerRegistry: docker-connection
+- task: Docker@2
+  displayName: Realizando o build e o push da imagem do MIC para o Docker Hub
+  inputs:
+    command: buildAndPush
+    repository: gabrielatbadocker/gabrielatba-tccpuc
+    tags: mic-latest
+    Dockerfile: $(Build.SourcesDirectory)/ModuloInformacoesCadastrais/ModuloInformacoesCadastrais.API/Dockerfile
