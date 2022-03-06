@@ -1,3 +1,5 @@
+trigger: none
+
 pool: TCC-PUC Agent Pool
 
 variables:
