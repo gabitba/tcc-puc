@@ -17,3 +17,9 @@ steps:
     repository: gabrielatbadocker/gabrielatba-tccpuc
     tags: mic-latest
     Dockerfile: $(Build.SourcesDirectory)/ModuloInformacoesCadastrais/ModuloInformacoesCadastrais.API/Dockerfile
+    buildContext: $(Build.SourcesDirectory)/ModuloInformacoesCadastrais
+- task: Docker@2
+  displayName: Deslogando do Docker Hub
+  inputs:
+    command: logout
+    containerRegistry: docker-connection
