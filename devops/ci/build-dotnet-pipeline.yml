@@ -3,10 +3,11 @@ pool: TCC-PUC Agent Pool
 variables:
 - name: dotnet_project
   value: ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj
+- name: dotnet_test_project
+  value: ModuloInformacoesCadastrais.Testes/ModuloInformacoesCadastrais.Testes.csproj
 
 steps:
   - task: UseDotNet@2
-    enabled: false
     displayName: Install .NET 6 on agent
     inputs:
       version: 6.x
@@ -15,19 +16,20 @@ steps:
     displayName: .NET restore
     inputs:
       command: restore
-      projects: $(dotnet_project)
+      projects: $(Build.SourcesDirectory)\$(dotnet_project)
   - task: DotNetCoreCLI@2
     displayName: .NET build
     inputs:
       command: build
-      projects: $(dotnet_project)
+      projects: $(Build.SourcesDirectory)\$(dotnet_project)
       arguments: -c Release
       publishWebProjects: false
   - task: DotNetCoreCLI@2
     displayName: .NET test
+    enabled: false
     inputs:
       command: test
-      projects: $(dotnet_project)
+      projects: $(Build.SourcesDirectory)\$(dotnet_test_project)
       arguments: >-
         /p:CollectCoverage=true
         /p:CoverletOutputFormat=opencover
