@@ -16,11 +16,11 @@ steps:
     displayName: Fazendo o restore das dependências do projeto
     inputs:
       command: restore
-      projects: $(Build.SourcesDirectory)\$(dotnet_project)
+      projects: $(Build.SourcesDirectory)/$(dotnet_project)
   - task: DotNetCoreCLI@2
     displayName: Realizando o build do projeto
     inputs:
       command: build
-      projects: $(Build.SourcesDirectory)\$(dotnet_project)
+      projects: $(Build.SourcesDirectory)/$(dotnet_project)
       arguments: -c Release
       publishWebProjects: false
