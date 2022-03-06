@@ -9,7 +9,7 @@ GO
 
 IF OBJECT_ID('Clientes', 'U') IS NULL
 BEGIN
-  CREATE TABLE dbo.clientes
+  CREATE TABLE dbo.Clientes
   (
     Id   INT PRIMARY KEY IDENTITY(1, 1)
   , Nome VARCHAR(100)
