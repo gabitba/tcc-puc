@@ -5,3 +5,8 @@ services:
     build: ./LocalDb
     ports:
       - "1433:1433"
+  camunda:
+    container_name: camunda
+    build: ./ModuloServicosCliente/Camunda
+    ports:
+      - "8080:8080"

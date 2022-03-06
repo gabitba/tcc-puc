@@ -30,14 +30,6 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-//// Preencher dados iniciais da PoC.
-//using (var scope = app.Services.CreateScope())
-//{
-//    var services = scope.ServiceProvider;
-
-//    SeedData.PreencherDados(services);
-//}
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

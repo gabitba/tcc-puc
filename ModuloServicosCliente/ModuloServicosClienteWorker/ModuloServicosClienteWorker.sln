@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuloServicosClienteWorker", "ModuloServicosClienteWorker\ModuloServicosClienteWorker.csproj", "{325CF797-1EE0-47C1-B2AF-8CC6F42EAFBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModuloServicosClienteWorker.Infra", "ModuloServicosClienteWorker.Infra\ModuloServicosClienteWorker.Infra.csproj", "{9BE56B39-F4CC-4CC7-B7B6-038FC9B655C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{325CF797-1EE0-47C1-B2AF-8CC6F42EAFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325CF797-1EE0-47C1-B2AF-8CC6F42EAFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325CF797-1EE0-47C1-B2AF-8CC6F42EAFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325CF797-1EE0-47C1-B2AF-8CC6F42EAFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BE56B39-F4CC-4CC7-B7B6-038FC9B655C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BE56B39-F4CC-4CC7-B7B6-038FC9B655C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BE56B39-F4CC-4CC7-B7B6-038FC9B655C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BE56B39-F4CC-4CC7-B7B6-038FC9B655C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF2C071B-E738-4487-8C54-6D3DD36599CF}
+	EndGlobalSection
+EndGlobal
