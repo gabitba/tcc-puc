@@ -1,0 +1,26 @@
+trigger: none
+
+pool: TCC-PUC Agent Pool
+
+variables:
+- name: dotnet_project
+  value: ModuloInformacoesCadastrais/ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj
+
+steps:
+  - task: UseDotNet@2
+    displayName: Install .NET 6 on agent
+    inputs:
+      version: 6.x
+      packageType: sdk
+  - task: DotNetCoreCLI@2
+    displayName: .NET restore
+    inputs:
+      command: restore
+      projects: $(Build.SourcesDirectory)\$(dotnet_project)
+  - task: DotNetCoreCLI@2
+    displayName: .NET build
+    inputs:
+      command: build
+      projects: $(Build.SourcesDirectory)\$(dotnet_project)
+      arguments: -c Release
+      publishWebProjects: false
