@@ -1,7 +1,3 @@
-trigger: none
-
-pool: TCC-PUC Agent Pool
-
 steps:
 - task: DockerInstaller@0
   displayName: Instalando o Docker
