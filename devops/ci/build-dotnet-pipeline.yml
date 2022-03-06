@@ -8,19 +8,19 @@ variables:
 
 steps:
   - task: UseDotNet@2
-    displayName: Install .NET 6 on agent
+    displayName: Instalando .NET 6 no agent
     inputs:
       version: 6.x
       packageType: sdk
   - task: DotNetCoreCLI@2
-    displayName: .NET restore
+    displayName: Fazendo o restore das dependências do projeto
     inputs:
       command: restore
-      projects: $(Build.SourcesDirectory)\$(dotnet_project)
+      projects: $(Build.SourcesDirectory)/$(dotnet_project)
   - task: DotNetCoreCLI@2
-    displayName: .NET build
+    displayName: Realizando o build do projeto
     inputs:
       command: build
-      projects: $(Build.SourcesDirectory)\$(dotnet_project)
+      projects: $(Build.SourcesDirectory)/$(dotnet_project)
       arguments: -c Release
       publishWebProjects: false

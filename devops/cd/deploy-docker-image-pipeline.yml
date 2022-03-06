@@ -1,0 +1,6 @@
+trigger: none
+
+pool: TCC-PUC Agent Pool
+
+steps:
+- template: push-docker-image-pipeline-template.yml
