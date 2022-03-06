@@ -3,6 +3,8 @@ trigger: none
 pool: TCC-PUC Agent Pool
 
 steps:
+- task: DockerInstaller@0
+  displayName: Instalando o Docker
 - task: Docker@2
   displayName: Logando no Docker Hub
   inputs:
