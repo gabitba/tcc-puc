@@ -4,9 +4,7 @@ pool: TCC-PUC Agent Pool
 
 variables:
 - name: dotnet_project
-  value: ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj
-- name: dotnet_test_project
-  value: ModuloInformacoesCadastrais.Testes/ModuloInformacoesCadastrais.Testes.csproj
+  value: ModuloInformacoesCadastrais/ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj
 
 steps:
   - task: UseDotNet@2
@@ -26,14 +24,3 @@ steps:
       projects: $(Build.SourcesDirectory)\$(dotnet_project)
       arguments: -c Release
       publishWebProjects: false
-  - task: DotNetCoreCLI@2
-    displayName: .NET test
-    enabled: false
-    inputs:
-      command: test
-      projects: $(Build.SourcesDirectory)\$(dotnet_test_project)
-      arguments: >-
-        /p:CollectCoverage=true
-        /p:CoverletOutputFormat=opencover
-        --collect "Code coverage"
-        --logger:trx
