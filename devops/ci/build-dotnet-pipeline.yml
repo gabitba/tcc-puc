@@ -1,3 +1,5 @@
+pool: TCC-PUC Agent Pool
+
 variables:
 - name: dotnet_project
   value: ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj
