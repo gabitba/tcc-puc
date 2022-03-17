@@ -1,21 +1,32 @@
-namespace ModuloServicosClienteWorker
-{
-    public class Worker : BackgroundService
-    {
-        private readonly ILogger<Worker> _logger;
+using ModuloServicosClienteWorker.Infra.Servicos;
+using Newtonsoft.Json;
+using Zeebe.Client;
+using Zeebe.Client.Api.Responses;
+using Zeebe.Client.Api.Worker;
 
-        public Worker(ILogger<Worker> logger)
+namespace ModuloServicosClienteWorker.Workers
+{
+    public class Worker : BaseWorker
+    {
+        private readonly ILogger<Worker> logger;
+
+        public Worker(
+            ILogger<Worker> logger,
+            IZeebeClient client,
+            ICamundaCloudWorkerFactory workerFactory) : base(client, workerFactory)
         {
-            _logger = logger;
+            this.logger = logger;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override string JobType => "email";
+
+        protected override string WorkerName => "CsharpGetStartedWorker";
+
+        protected override async Task JobHandler(IJobClient jobClient, IJob activatedJob)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-            }
+            logger.LogInformation("Received job: " + activatedJob);
+
+            await jobClient.NewCompleteJobCommand(activatedJob.Key).Send();
         }
     }
 }

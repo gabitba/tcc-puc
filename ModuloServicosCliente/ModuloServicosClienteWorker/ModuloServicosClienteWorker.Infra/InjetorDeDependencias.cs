@@ -1,19 +1,15 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ModuloServicosClienteWorker.Infra.Servicos;
 
 namespace ModuloInformacoesCadastrais.Infra.IoC
 {
     public static class InjetorDeDependencias
     {
-        public static void ConfigurarWorkers(IServiceCollection servicos, IConfiguration configuration)
+        public static void ConfigurarDependencias(IServiceCollection servicos, IConfiguration configuration)
         {
-            //servicos.AddDbContext<AppDbContext>(options =>
-            //{
-            //    options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
-            //});
-
-            //servicos.AddScoped<IClientesRepositorio, ClientesRepositorio>();
-            //servicos.AddScoped<IClientesServico, ClientesServicos>();
+            servicos.AddSingleton<ICamundaCloudClientFactory, CamundaCloudClientFactory>();
+            servicos.AddSingleton<ICamundaCloudWorkerFactory, CamundaCloudWorkerFactory>();
         }
     }
 }

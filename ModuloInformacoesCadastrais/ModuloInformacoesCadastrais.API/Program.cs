@@ -1,11 +1,11 @@
 using Microsoft.OpenApi.Models;
-using ModuloInformacoesCadastrais.Infra.Data.Database;
 using ModuloInformacoesCadastrais.Infra.IoC;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Injeção de dependências.
+
 InjetorDeDependencias.ConfigurarDependencias(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
