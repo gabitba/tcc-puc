@@ -7,13 +7,14 @@ namespace ModuloServicosClienteWorker.Workers
 {
     public abstract class BaseWorker : BackgroundService
     {
-        protected readonly IZeebeClient client;
-
+        protected readonly ICamundaCloudClientFactory clientFactory;
         protected readonly ICamundaCloudWorkerFactory workerFactory;
 
-        protected BaseWorker(IZeebeClient client, ICamundaCloudWorkerFactory workerFactory)
+        protected readonly IJobWorker worker;
+
+        protected BaseWorker(ICamundaCloudClientFactory clientFactory, ICamundaCloudWorkerFactory workerFactory)
         {
-            this.client = client;
+            this.clientFactory = clientFactory;
             this.workerFactory = workerFactory;
         }
         protected abstract string JobType { get; }
@@ -26,7 +27,15 @@ namespace ModuloServicosClienteWorker.Workers
         {
             await Task.Run(() =>
             {
-                workerFactory.CreateWorker(client, JobType, JobHandler, WorkerName);
+                using(var client = clientFactory.CreateClient())
+                {
+                    using (var job = workerFactory.CreateWorker(client, JobType, JobHandler, WorkerName))
+                    {
+                        do
+                        {
+                        } while (!stoppingToken.IsCancellationRequested);
+                    }
+                }
             });
         }
     }

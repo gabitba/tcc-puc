@@ -6,8 +6,11 @@ IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((context, services) =>
     {
         var configuration = context.Configuration;
+
         services.Configure<CamundaCloudClientOptions>(
             configuration.GetSection(CamundaCloudClientOptions.ConfigName));
+        services.Configure<CamundaCloudWorkerOptions>(
+            configuration.GetSection(CamundaCloudWorkerOptions.ConfigName));
 
         InjetorDeDependencias.ConfigurarDependencias(services, configuration);
 

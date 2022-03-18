@@ -5,6 +5,6 @@ namespace ModuloServicosClienteWorker.Infra.Servicos
 {
     public interface ICamundaCloudWorkerFactory
     {
-        void CreateWorker(IZeebeClient client, string jobType, AsyncJobHandler jobHandler, string workerName);
+        IJobWorker CreateWorker(IZeebeClient client, string jobType, AsyncJobHandler jobHandler, string workerName);
     }
 }

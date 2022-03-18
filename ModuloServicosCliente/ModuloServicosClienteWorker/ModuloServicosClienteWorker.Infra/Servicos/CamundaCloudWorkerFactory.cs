@@ -13,9 +13,10 @@ namespace ModuloServicosClienteWorker.Infra.Servicos
             this.options = options;
         }
 
-        public void CreateWorker(IZeebeClient client, string jobType, AsyncJobHandler jobHandler, string workerName)
+        public IJobWorker CreateWorker(IZeebeClient client, string jobType, AsyncJobHandler jobHandler, string workerName)
         {
-            client.NewWorker()
+            
+            return client.NewWorker()
                 .JobType(jobType)
                 .Handler(jobHandler)
                 .MaxJobsActive(options.Value.MaxJobActive)

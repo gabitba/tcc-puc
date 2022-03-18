@@ -20,6 +20,7 @@ namespace ModuloServicosClienteWorker.Infra.Servicos
                 .UseClientId(options.Value.ClientId)
                 .UseClientSecret(options.Value.ClientSecret)
                 .UseContactPoint(options.Value.ContactPoint)
+                .UseAuthServer(options.Value.AuthServer)
                 //.UseLoggerFactory(LoggerFactory) // optional
                 .Build();
         }
