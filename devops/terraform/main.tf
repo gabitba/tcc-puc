@@ -59,10 +59,11 @@ module "apiboaentrega" {
   source                  = "./modules/apimanagement"
   companyName             = var.companyName
   companyDisplayName      = var.companyDisplayName
+  subscriptionId          = "f63ea9a1-6b21-4536-a566-b7e50aee50cb"
   resourceGroupName       = data.azurerm_resource_group.tccpuc.name
   location                = data.azurerm_resource_group.tccpuc.location
   logAnalyticsWorkspaceId = azurerm_log_analytics_workspace.boaentrega.id
   publisherEmail          = var.publisherEmail
-  micServiceName          = module.mic.apiName
+  micServiceName          = module.mic.appName
   micApiPath              = "api"
 }

@@ -10,6 +10,11 @@ variable "companyDisplayName" {
   default     = "Boa Entrega"
 }
 
+variable "subscriptionId" {
+  type        = string
+  description = "(required) The Azure Subscription Id where the resources are created."
+}
+
 variable "resourceGroupName" {
   type        = string
   description = "(required) The name of the resource group which will contain the resources."
