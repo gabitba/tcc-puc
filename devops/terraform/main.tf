@@ -22,8 +22,7 @@ terraform {
 }
 
 provider "azurerm" {
-  skip_provider_registration = true
-  use_msal                   = true
+  use_msal = true
   features {
     api_management {
       purge_soft_delete_on_destroy = true
@@ -48,24 +47,22 @@ resource "azurerm_log_analytics_workspace" "boaentrega" {
   }
 }
 
-resource "azurerm_application_insights" "apiboaentrega" {
-  name                = "apm-apiboaentrega"
-  location            = data.azurerm_resource_group.tccpuc.location
-  resource_group_name = data.azurerm_resource_group.tccpuc.name
-  workspace_id        = azurerm_log_analytics_workspace.boaentrega.id
-  application_type    = "other"
-  tags = {
-    "terraform" = "true"
-  }
+module "mic" {
+  source                  = "./modules/mic"
+  companyName             = var.companyName
+  resourceGroupName       = data.azurerm_resource_group.tccpuc.name
+  location                = data.azurerm_resource_group.tccpuc.location
+  logAnalyticsWorkspaceId = azurerm_log_analytics_workspace.boaentrega.id
 }
 
-resource "azurerm_application_insights" "mic" {
-  name                = "apm-mic"
-  location            = data.azurerm_resource_group.tccpuc.location
-  resource_group_name = data.azurerm_resource_group.tccpuc.name
-  workspace_id        = azurerm_log_analytics_workspace.boaentrega.id
-  application_type    = "web"
-  tags = {
-    "terraform" = "true"
-  }
+module "apiboaentrega" {
+  source                  = "./modules/apimanagement"
+  companyName             = var.companyName
+  companyDisplayName      = var.companyDisplayName
+  resourceGroupName       = data.azurerm_resource_group.tccpuc.name
+  location                = data.azurerm_resource_group.tccpuc.location
+  logAnalyticsWorkspaceId = azurerm_log_analytics_workspace.boaentrega.id
+  publisherEmail          = var.publisherEmail
+  micServiceName          = module.mic.apiName
+  micApiPath              = "api"
 }
