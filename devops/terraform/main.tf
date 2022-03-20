@@ -24,9 +24,48 @@ terraform {
 provider "azurerm" {
   skip_provider_registration = true
   use_msal                   = true
-  features {}
+  features {
+    api_management {
+      purge_soft_delete_on_destroy = true
+    }
+    log_analytics_workspace {
+      permanently_delete_on_destroy = true
+    }
+  }
 }
 
 data "azurerm_resource_group" "tccpuc" {
   name = "TCC-PUC"
+}
+
+resource "azurerm_log_analytics_workspace" "boaentrega" {
+  name                = "law-${var.companyName}"
+  location            = data.azurerm_resource_group.tccpuc.location
+  resource_group_name = data.azurerm_resource_group.tccpuc.name
+  retention_in_days   = 30
+  tags = {
+    "terraform" = "true"
+  }
+}
+
+resource "azurerm_application_insights" "apiboaentrega" {
+  name                = "apm-apiboaentrega"
+  location            = data.azurerm_resource_group.tccpuc.location
+  resource_group_name = data.azurerm_resource_group.tccpuc.name
+  workspace_id        = azurerm_log_analytics_workspace.boaentrega.id
+  application_type    = "other"
+  tags = {
+    "terraform" = "true"
+  }
+}
+
+resource "azurerm_application_insights" "mic" {
+  name                = "apm-mic"
+  location            = data.azurerm_resource_group.tccpuc.location
+  resource_group_name = data.azurerm_resource_group.tccpuc.name
+  workspace_id        = azurerm_log_analytics_workspace.boaentrega.id
+  application_type    = "web"
+  tags = {
+    "terraform" = "true"
+  }
 }

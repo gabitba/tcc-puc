@@ -1,3 +1,4 @@
-output "id" {
-  value = data.azurerm_resource_group.tccpuc.id
+output "mic_instrumentation_key" {
+  value     = azurerm_application_insights.mic.instrumentation_key
+  sensitive = true
 }
