@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModuloServicosClienteWorker.Infra\ModuloServicosCliente.Infra.csproj" />
+    <ProjectReference Include="..\ModuloServicosCliente.Infra\ModuloServicosCliente.Infra.csproj" />
   </ItemGroup>
 </Project>
