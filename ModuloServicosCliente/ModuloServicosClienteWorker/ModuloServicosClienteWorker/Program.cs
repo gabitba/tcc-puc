@@ -2,20 +2,24 @@ using ModuloInformacoesCadastrais.Infra.IoC;
 using ModuloServicosClienteWorker.Infra.Options;
 using ModuloServicosClienteWorker.Workers;
 
-IHost host = Host.CreateDefaultBuilder(args)
-    .ConfigureServices((context, services) =>
-    {
-        var configuration = context.Configuration;
+IHostBuilder builder = Host.CreateDefaultBuilder(args)
+	.ConfigureLogging(logging =>
+	{
+		logging.ClearProviders();
+		logging.AddConsole();
+	})
+	.ConfigureServices((context, services) =>
+	{
+		var configuration = context.Configuration;
 
-        services.Configure<CamundaCloudClientOptions>(
-            configuration.GetSection(CamundaCloudClientOptions.ConfigName));
-        services.Configure<CamundaCloudWorkerOptions>(
-            configuration.GetSection(CamundaCloudWorkerOptions.ConfigName));
+		services.Configure<CamundaCloudClientOptions>(
+		  configuration.GetSection(CamundaCloudClientOptions.ConfigName));
+		services.Configure<CamundaCloudWorkerOptions>(
+		  configuration.GetSection(CamundaCloudWorkerOptions.ConfigName));
 
-        InjetorDeDependencias.ConfigurarDependencias(services, configuration);
+		InjetorDeDependencias.ConfigurarDependencias(services, configuration);
+		services.AddHostedService<Worker>();
+	});
 
-        services.AddHostedService<Worker>();
-    })
-    .Build();
-
+IHost host = builder.Build();
 await host.RunAsync();

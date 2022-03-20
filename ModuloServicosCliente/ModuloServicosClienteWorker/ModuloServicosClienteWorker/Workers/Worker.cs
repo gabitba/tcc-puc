@@ -1,5 +1,4 @@
-using ModuloServicosClienteWorker.Infra.Servicos;
-using Zeebe.Client;
+using ModuloServicosClienteWorker.Infra.Services;
 using Zeebe.Client.Api.Responses;
 using Zeebe.Client.Api.Worker;
 
@@ -11,8 +10,7 @@ namespace ModuloServicosClienteWorker.Workers
 
         public Worker(
             ILogger<Worker> logger,
-            ICamundaCloudClientFactory clientFactory,
-            ICamundaCloudWorkerFactory workerFactory) : base(clientFactory, workerFactory)
+            ICamundaService camundaService) : base(logger, camundaService)
         {
             this.logger = logger;
         }
@@ -23,9 +21,7 @@ namespace ModuloServicosClienteWorker.Workers
 
         protected override async Task JobHandler(IJobClient jobClient, IJob activatedJob)
         {
-            //logger.LogInformation("Received job: " + activatedJob);
-
-            Console.WriteLine($"Received job: {activatedJob}");
+            logger.LogInformation("Received job: " + activatedJob);
             await jobClient.NewCompleteJobCommand(activatedJob.Key).Send();
         }
     }

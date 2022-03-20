@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ModuloServicosClienteWorker.Infra.Servicos;
+using ModuloServicosClienteWorker.Infra.Services;
 
 namespace ModuloInformacoesCadastrais.Infra.IoC
 {
@@ -8,8 +8,7 @@ namespace ModuloInformacoesCadastrais.Infra.IoC
     {
         public static void ConfigurarDependencias(IServiceCollection servicos, IConfiguration configuration)
         {
-            servicos.AddSingleton<ICamundaCloudClientFactory, CamundaCloudClientFactory>();
-            servicos.AddSingleton<ICamundaCloudWorkerFactory, CamundaCloudWorkerFactory>();
+            servicos.AddSingleton<ICamundaService, CamundaService>();
         }
     }
 }

@@ -4,8 +4,6 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Injeção de dependências.
-
 InjetorDeDependencias.ConfigurarDependencias(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
@@ -30,12 +28,8 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

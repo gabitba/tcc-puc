@@ -1,5 +1,4 @@
-﻿using ModuloServicosClienteWorker.Infra.Servicos;
-using Zeebe.Client;
+﻿using ModuloServicosClienteWorker.Infra.Services;
 using Zeebe.Client.Api.Responses;
 using Zeebe.Client.Api.Worker;
 
@@ -7,15 +6,13 @@ namespace ModuloServicosClienteWorker.Workers
 {
     public abstract class BaseWorker : BackgroundService
     {
-        protected readonly ICamundaCloudClientFactory clientFactory;
-        protected readonly ICamundaCloudWorkerFactory workerFactory;
+        ILogger<BaseWorker> logger;
+        protected readonly ICamundaService camundaService;
 
-        protected readonly IJobWorker worker;
-
-        protected BaseWorker(ICamundaCloudClientFactory clientFactory, ICamundaCloudWorkerFactory workerFactory)
+        protected BaseWorker(ILogger<BaseWorker> logger, ICamundaService camundaService)
         {
-            this.clientFactory = clientFactory;
-            this.workerFactory = workerFactory;
+            this.logger = logger;
+            this.camundaService = camundaService;
         }
         protected abstract string JobType { get; }
 
@@ -27,14 +24,12 @@ namespace ModuloServicosClienteWorker.Workers
         {
             await Task.Run(() =>
             {
-                using(var client = clientFactory.CreateClient())
+                using (var job = camundaService.CriarWorker(JobType, JobHandler, WorkerName))
                 {
-                    using (var job = workerFactory.CreateWorker(client, JobType, JobHandler, WorkerName))
+                    logger.LogInformation("Started job: " + JobType);
+                    do
                     {
-                        do
-                        {
-                        } while (!stoppingToken.IsCancellationRequested);
-                    }
+                    } while (!stoppingToken.IsCancellationRequested);
                 }
             });
         }

@@ -1,12 +1,7 @@
 version: "3.9"
 services:
-  db:
-    container_name: tcc_db
-    build: ./LocalDb
-    ports:
-      - "1433:1433"
-  camunda:
-    container_name: camunda
-    build: ./ModuloServicosCliente/Camunda
-    ports:
-      - "8080:8080"
+    db:
+        container_name: tcc_db
+        build: ./LocalDb
+        ports:
+          - "1433:1433"
