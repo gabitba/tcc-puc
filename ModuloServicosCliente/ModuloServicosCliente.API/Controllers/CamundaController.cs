@@ -36,15 +36,22 @@ namespace ModuloServicosCliente.API.Controllers
                 return BadRequest();
             }
 
-            var instancia = await camundaService.ComecarInstanciaProcesso(novoProcesso.IdProcesso, novoProcesso.Variaveis);
-
-            return Ok(new ComecarInstanciaProcessoResponseModel
+            try
             {
-                IdProcesso = instancia.BpmnProcessId,
-                KeyDefinicaoProcesso = instancia.ProcessDefinitionKey,
-                Versao = instancia.Version,
-                KeyInstancia = instancia.ProcessInstanceKey,
-            });
+                var instancia = await camundaService.ComecarInstanciaProcesso(novoProcesso.IdProcesso, novoProcesso.Variaveis);
+
+                return Ok(new ComecarInstanciaProcessoResponseModel
+                {
+                    IdProcesso = instancia.BpmnProcessId,
+                    KeyDefinicaoProcesso = instancia.ProcessDefinitionKey,
+                    Versao = instancia.Version,
+                    KeyInstancia = instancia.ProcessInstanceKey,
+                });
+            } catch (Exception ex)
+            {
+                logger.LogError(ex.Message, ex.StackTrace);
+                return StatusCode(500, "Erro inesperado.");
+            }
         }
     }
 }
