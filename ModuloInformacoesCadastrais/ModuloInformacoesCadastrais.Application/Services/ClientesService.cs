@@ -5,11 +5,11 @@ using ModuloInformacoesCadastrais.Domain.Interfaces;
 
 namespace ModuloInformacoesCadastrais.Application.Services
 {
-    public class ClientesServices : IClientesServico
+    public class ClientesService : IClientesService
     {
         readonly IClientesRepositorio clientesRepositorio;
 
-        public ClientesServices(IClientesRepositorio clientesRepository)
+        public ClientesService(IClientesRepositorio clientesRepository)
         {
             this.clientesRepositorio = clientesRepository;
         }

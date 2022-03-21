@@ -19,7 +19,7 @@ namespace ModuloInformacoesCadastrais.Infra.IoC
             });
 
             servicos.AddScoped<IClientesRepositorio, ClientesRepositorio>();
-            servicos.AddScoped<IClientesServico, ClientesServices>();
+            servicos.AddScoped<IClientesService, ClientesService>();
         }
     }
 }

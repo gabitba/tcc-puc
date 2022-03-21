@@ -2,7 +2,7 @@
 
 namespace ModuloInformacoesCadastrais.Application.Interfaces
 {
-    public interface IClientesServico
+    public interface IClientesService
     {
         Task<IEnumerable<ClienteDTO>> ObterClientesAsync();
 
