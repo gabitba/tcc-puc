@@ -6,12 +6,12 @@ namespace ModuloServicosCliente.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CamundaController : ControllerBase
+    public class ProcessosController : BaseController
     {
-        private readonly ILogger<CamundaController> logger;
+        private readonly ILogger<ProcessosController> logger;
         private readonly IZeebeService camundaService;
 
-        public CamundaController(ILogger<CamundaController> logger, IZeebeService camundaService)
+        public ProcessosController(ILogger<ProcessosController> logger, IZeebeService camundaService) : base(logger)
         {
             this.logger = logger;
             this.camundaService = camundaService;
@@ -29,16 +29,17 @@ namespace ModuloServicosCliente.API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [Produces("application/json")]
-        public async Task<ActionResult<StartProcessoResponseModel>> StartProcessoObterReportCliente([FromBody] StartProcessoCriarReportClienteRequest novoProcesso)
+        public async Task<ActionResult<StartProcessoResponseModel>> StartProcessoObterReportClienteAsync([FromBody] StartProcessoCriarReportClienteRequest novoProcesso)
         {
+            logger.LogInformation($"Nova requisicao {nameof(StartProcessoObterReportClienteAsync)}.", novoProcesso);
+
             if (novoProcesso == null || string.IsNullOrWhiteSpace(novoProcesso.ClienteId))
             {
                 return BadRequest();
             }
-
             try
             {
-                var instancia = await camundaService.ComecarInstanciaProcesso(ProcessosBPMN.ObterReportCliente, new Dictionary<string, string>());
+                var instancia = await camundaService.ComecarInstanciaProcessoAsync(ProcessosBPMN.ObterReportCliente, new Dictionary<string, string>());
 
                 return Ok(new StartProcessoResponseModel
                 {
@@ -50,8 +51,7 @@ namespace ModuloServicosCliente.API.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError(ex.Message, ex.StackTrace);
-                return StatusCode(500, "Erro inesperado.");
+                return HandleError(ex);
             }
         }
 
@@ -67,16 +67,17 @@ namespace ModuloServicosCliente.API.Controllers
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [Produces("application/json")]
-        public async Task<ActionResult<StartProcessoResponseModel>> ComecarInstanciaProcesso([FromBody] StartProcessoRequestModel novoProcesso)
+        public async Task<ActionResult<StartProcessoResponseModel>> ComecarInstanciaProcessoAsync([FromBody] StartProcessoRequestModel novoProcesso)
         {
+            logger.LogInformation($"Nova requisicao {nameof(ComecarInstanciaProcessoAsync)}.", novoProcesso);
+
             if (novoProcesso == null || string.IsNullOrWhiteSpace(novoProcesso.IdProcesso))
             {
                 return BadRequest();
             }
-
             try
             {
-                var instancia = await camundaService.ComecarInstanciaProcesso(novoProcesso.IdProcesso, novoProcesso.Variaveis);
+                var instancia = await camundaService.ComecarInstanciaProcessoAsync(novoProcesso.IdProcesso, novoProcesso.Variaveis);
 
                 return Ok(new StartProcessoResponseModel
                 {
@@ -85,10 +86,10 @@ namespace ModuloServicosCliente.API.Controllers
                     Versao = instancia.Version,
                     KeyInstancia = instancia.ProcessInstanceKey,
                 });
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                logger.LogError(ex.Message, ex.StackTrace);
-                return StatusCode(500, "Erro inesperado.");
+                return HandleError(ex);
             }
         }
     }

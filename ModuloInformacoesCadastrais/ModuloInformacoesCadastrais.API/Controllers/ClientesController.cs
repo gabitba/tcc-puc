@@ -7,12 +7,12 @@ namespace ModuloInformacoesCadastrais.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ClientesController : ControllerBase
+    public class ClientesController : BaseController
     {
         private readonly ILogger<ClientesController> logger;
         private readonly IClientesService clientesServico;
 
-        public ClientesController(ILogger<ClientesController> logger, IClientesService clientesServico)
+        public ClientesController(ILogger<ClientesController> logger, IClientesService clientesServico) : base(logger)
         {
             this.logger = logger;
             this.clientesServico = clientesServico;
@@ -30,16 +30,19 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<ClienteModel>>> ObterClientesAsync()
         {
-            logger.Log(LogLevel.Information, "Chegou requisição.");
+            logger.LogInformation($"Nova requisicao {nameof(ObterClientesAsync)}.");
 
-            var clientes = await clientesServico.ObterClientesAsync();
+            try
+            {
+                var clientes = await clientesServico.ObterClientesAsync();
 
-            return Ok(clientes.Select(cliente => new ClienteModel
-            { 
-                Id = cliente.Id,
-                Nome = cliente.Nome,
-                Endereco = cliente.Endereco,
-            }));
+                return Ok(clientes.Select(cliente => ClienteModel.ConvertToModel(cliente)));
+            }
+            catch (Exception ex)
+            {
+                return HandleError(ex);
+            }
+
         }
 
         /// <summary>
@@ -54,20 +57,23 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<ClienteModel>> ObterClienteAsync([FromRoute] int idCliente)
         {
-            logger.Log(LogLevel.Information, $"Chegou requisição: {idCliente}");
+            logger.LogInformation($"Nova requisicao {nameof(ObterClienteAsync)}.", idCliente);
 
-            var cliente = await clientesServico.ObterClienteAsync(idCliente);
-
-            if(cliente == null)
+            try
             {
-                return NotFound();
-            }
+                var cliente = await clientesServico.ObterClienteAsync(idCliente);
 
-            return Ok(new ClienteModel { 
-                Id = cliente.Id,
-                Nome = cliente.Nome,
-                Endereco = cliente.Endereco
-            });
+                if (cliente == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(ClienteModel.ConvertToModel(cliente));
+            }
+            catch (Exception ex)
+            {
+                return HandleError(ex);
+            }
         }
 
         /// <summary>
@@ -82,23 +88,32 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<CadastrarClienteResponseModel>> CadastrarClienteAsync([FromBody] CadastrarClienteRequestModel novoCliente)
         {
-            if(novoCliente == null)
+            logger.LogInformation($"Nova requisicao {nameof(CadastrarClienteAsync)}.", novoCliente);
+
+            try
             {
-                return BadRequest();
+                if (novoCliente == null)
+                {
+                    return BadRequest();
+                }
+
+                var novoClienteDTO = new ClienteDTO
+                {
+                    Nome = novoCliente.Nome,
+                    Endereco = novoCliente.Endereco
+                };
+
+                var idCliente = await clientesServico.CadastrarClienteAsync(novoClienteDTO);
+
+                return Ok(new CadastrarClienteResponseModel
+                {
+                    id = idCliente,
+                });
             }
-
-            var novoClienteDTO = new ClienteDTO
+            catch(Exception ex)
             {
-                Nome = novoCliente.Nome,
-                Endereco = novoCliente.Endereco
-            };
-
-            var idCliente = await clientesServico.CadastrarClienteAsync(novoClienteDTO);
-
-            return Ok(new CadastrarClienteResponseModel
-            {
-                id = idCliente,
-            });
+                return HandleError(ex);
+            }
         }
 
         /// <summary>
@@ -114,19 +129,27 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         [Produces("application/json")]
         public async Task<ActionResult> RemoverClienteAsync([FromRoute]int idCliente)
         {
-            if (idCliente == 0)
-            {
-                return BadRequest();
-            }
+            logger.LogInformation($"Nova requisicao {nameof(RemoverClienteAsync)}.", idCliente);
 
-            bool removido = await clientesServico.RemoverClienteAync(idCliente);
-            if (!removido)
+            try
             {
-                return NotFound();
-            }
+                if (idCliente == 0)
+                {
+                    return BadRequest();
+                }
 
-            return Ok();
+                bool removido = await clientesServico.RemoverClienteAync(idCliente);
+                if (!removido)
+                {
+                    return NotFound();
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return HandleError(ex);
+            }
         }
-}
-
+    }
 }

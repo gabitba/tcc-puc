@@ -28,7 +28,7 @@ namespace ModuloServicosCliente.Infra.Interfaces
                 .Build();
         }
 
-        public async Task<IProcessInstanceResponse> ComecarInstanciaProcesso(string bpmnProcessId, IDictionary<string, string> variablesJson)
+        public async Task<IProcessInstanceResponse> ComecarInstanciaProcessoAsync(string bpmnProcessId, IDictionary<string, string> variablesJson)
         {
             string variables = JsonSerializer.Serialize(variablesJson);
             return await client
