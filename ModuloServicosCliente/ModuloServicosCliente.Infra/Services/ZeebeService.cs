@@ -1,19 +1,20 @@
 ﻿using Microsoft.Extensions.Options;
-using ModuloServicosClienteWorker.Infra.Options;
+using ModuloServicosCliente.Application.Interfaces;
+using ModuloServicosCliente.Infra.Options;
 using System.Text.Json;
 using Zeebe.Client;
 using Zeebe.Client.Api.Responses;
 using Zeebe.Client.Api.Worker;
 using Zeebe.Client.Impl.Builder;
 
-namespace ModuloServicosClienteWorker.Infra.Services
+namespace ModuloServicosCliente.Infra.Interfaces
 {
-    public class CamundaService : ICamundaService
+    public class ZeebeService : IZeebeService
     {
         readonly IZeebeClient client;
         readonly IOptions<CamundaCloudWorkerOptions> workerOptions;
 
-        public CamundaService(IOptions<CamundaCloudClientOptions> clientOptions, IOptions<CamundaCloudWorkerOptions> workerOptions)
+        public ZeebeService(IOptions<CamundaCloudClientOptions> clientOptions, IOptions<CamundaCloudWorkerOptions> workerOptions)
         {
             this.workerOptions = workerOptions;
 
@@ -27,7 +28,7 @@ namespace ModuloServicosClienteWorker.Infra.Services
                 .Build();
         }
 
-        public async Task<IProcessInstanceResponse> ComecarInstanciaProcesso(string bpmnProcessId, IDictionary<object, object> variablesJson)
+        public async Task<IProcessInstanceResponse> ComecarInstanciaProcesso(string bpmnProcessId, IDictionary<string, string> variablesJson)
         {
             string variables = JsonSerializer.Serialize(variablesJson);
             return await client

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ModuloServicosClienteWorker.Infra.Services;
+using ModuloServicosCliente.Application.Interfaces;
+using ModuloServicosCliente.Infra.Interfaces;
 
 namespace ModuloInformacoesCadastrais.Infra.IoC
 {
@@ -8,7 +9,7 @@ namespace ModuloInformacoesCadastrais.Infra.IoC
     {
         public static void ConfigurarDependencias(IServiceCollection servicos, IConfiguration configuration)
         {
-            servicos.AddSingleton<ICamundaService, CamundaService>();
+            servicos.AddSingleton<IZeebeService, ZeebeService>();
         }
     }
 }

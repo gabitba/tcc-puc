@@ -1,6 +1,6 @@
 using ModuloInformacoesCadastrais.Infra.IoC;
-using ModuloServicosClienteWorker.Infra.Options;
-using ModuloServicosClienteWorker.Workers;
+using ModuloServicosCliente.Infra.Options;
+using ModuloServicosCliente.Workers;
 
 IHostBuilder builder = Host.CreateDefaultBuilder(args)
 	.ConfigureLogging(logging =>
@@ -18,7 +18,7 @@ IHostBuilder builder = Host.CreateDefaultBuilder(args)
 		  configuration.GetSection(CamundaCloudWorkerOptions.ConfigName));
 
 		InjetorDeDependencias.ConfigurarDependencias(services, configuration);
-		services.AddHostedService<Worker>();
+		services.AddHostedService<ObterDadosClienteWorker>();
 	});
 
 IHost host = builder.Build();

@@ -2,15 +2,15 @@
 
 namespace ModuloServicosCliente.API.Models
 {
-    public class CriarInstanciaProcessoRequestModel
+    public class StartProcessoRequestModel
     {
         [Required]
         public string IdProcesso { get; set; } = string.Empty;
 
-        public Dictionary<object, object> Variaveis { get; set; } = new Dictionary<object, object>();
+        public Dictionary<string, string> Variaveis { get; set; } = new Dictionary<string, string>();
     }
 
-    public class ComecarInstanciaProcessoResponseModel
+    public class StartProcessoResponseModel
     {
         public string IdProcesso { get; internal set; } = string.Empty;
         public long KeyInstancia { get; internal set; }

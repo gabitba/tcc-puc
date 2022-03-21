@@ -1,4 +1,4 @@
-﻿namespace ModuloServicosClienteWorker.Infra.Options
+﻿namespace ModuloServicosCliente.Infra.Options
 {
     /// <param name="MaxJobActive">Time in seconds.</param>
     /// <param name="Timeout">Time in seconds.</param>

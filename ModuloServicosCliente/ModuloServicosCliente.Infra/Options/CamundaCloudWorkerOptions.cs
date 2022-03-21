@@ -1,4 +1,4 @@
-﻿namespace ModuloServicosClienteWorker.Infra.Options
+﻿namespace ModuloServicosCliente.Infra.Options
 {
     public class CamundaCloudClientOptions
     {

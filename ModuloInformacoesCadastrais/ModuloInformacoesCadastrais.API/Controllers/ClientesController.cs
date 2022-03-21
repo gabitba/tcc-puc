@@ -10,9 +10,9 @@ namespace ModuloInformacoesCadastrais.API.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly ILogger<ClientesController> logger;
-        private readonly IClientesServico clientesServico;
+        private readonly IClientesServices clientesServico;
 
-        public ClientesController(ILogger<ClientesController> logger, IClientesServico clientesServico)
+        public ClientesController(ILogger<ClientesController> logger, IClientesServices clientesServico)
         {
             this.logger = logger;
             this.clientesServico = clientesServico;

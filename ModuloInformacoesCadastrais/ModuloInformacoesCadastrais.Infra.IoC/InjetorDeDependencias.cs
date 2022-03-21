@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ModuloInformacoesCadastrais.Application.Interfaces;
-using ModuloInformacoesCadastrais.Application.Servicos;
+using ModuloInformacoesCadastrais.Application.Services;
 using ModuloInformacoesCadastrais.Domain.Interfaces;
 using ModuloInformacoesCadastrais.Domain.Repositorios;
 using ModuloInformacoesCadastrais.Infra.Data.Context;
@@ -19,7 +19,7 @@ namespace ModuloInformacoesCadastrais.Infra.IoC
             });
 
             servicos.AddScoped<IClientesRepositorio, ClientesRepositorio>();
-            servicos.AddScoped<IClientesServico, ClientesServicos>();
+            servicos.AddScoped<IClientesServico, ClientesServices>();
         }
     }
 }

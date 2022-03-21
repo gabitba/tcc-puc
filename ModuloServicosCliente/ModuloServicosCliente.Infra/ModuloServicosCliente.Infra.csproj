@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositorios\" />
+    <ProjectReference Include="..\ModuloServicosCliente.Application\ModuloServicosCliente.Application.csproj" />
   </ItemGroup>
 
 </Project>

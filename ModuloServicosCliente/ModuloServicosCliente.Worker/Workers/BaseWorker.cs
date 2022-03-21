@@ -1,22 +1,20 @@
-﻿using ModuloServicosClienteWorker.Infra.Services;
+﻿using ModuloServicosCliente.Application.Interfaces;
 using Zeebe.Client.Api.Responses;
 using Zeebe.Client.Api.Worker;
 
-namespace ModuloServicosClienteWorker.Workers
+namespace ModuloServicosCliente.Workers
 {
     public abstract class BaseWorker : BackgroundService
     {
         ILogger<BaseWorker> logger;
-        protected readonly ICamundaService camundaService;
+        protected readonly IZeebeService camundaService;
 
-        protected BaseWorker(ILogger<BaseWorker> logger, ICamundaService camundaService)
+        protected BaseWorker(ILogger<BaseWorker> logger, IZeebeService camundaService)
         {
             this.logger = logger;
             this.camundaService = camundaService;
         }
         protected abstract string JobType { get; }
-
-        protected abstract string WorkerName { get; }
 
         protected abstract Task JobHandler(IJobClient jobClient, IJob activatedJob);
 
@@ -24,7 +22,7 @@ namespace ModuloServicosClienteWorker.Workers
         {
             await Task.Run(() =>
             {
-                using (var job = camundaService.CriarWorker(JobType, JobHandler, WorkerName))
+                using (camundaService.CriarWorker(JobType, JobHandler, JobType))
                 {
                     logger.LogInformation("Started job: " + JobType);
                     do
