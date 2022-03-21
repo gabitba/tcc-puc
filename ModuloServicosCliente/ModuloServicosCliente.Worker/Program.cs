@@ -1,5 +1,4 @@
 using ModuloInformacoesCadastrais.Infra.IoC;
-using ModuloServicosCliente.Infra.Options;
 using ModuloServicosCliente.Workers;
 
 IHostBuilder builder = Host.CreateDefaultBuilder(args)
@@ -10,14 +9,7 @@ IHostBuilder builder = Host.CreateDefaultBuilder(args)
 	})
 	.ConfigureServices((context, services) =>
 	{
-		var configuration = context.Configuration;
-
-		services.Configure<CamundaCloudClientOptions>(
-		  configuration.GetSection(CamundaCloudClientOptions.ConfigName));
-		services.Configure<CamundaCloudWorkerOptions>(
-		  configuration.GetSection(CamundaCloudWorkerOptions.ConfigName));
-
-		InjetorDeDependencias.ConfigurarDependencias(services, configuration);
+        InjetorDeDependencias.ConfigurarDependencias(services, context.Configuration);
 		services.AddHostedService<ObterDadosClienteWorker>();
 	});
 

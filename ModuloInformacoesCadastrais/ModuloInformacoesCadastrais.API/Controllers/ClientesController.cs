@@ -66,6 +66,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
             return Ok(new ClienteModel { 
                 Id = cliente.Id,
                 Nome = cliente.Nome,
+                Endereco = cliente.Endereco
             });
         }
 

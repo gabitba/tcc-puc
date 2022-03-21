@@ -18,7 +18,7 @@ namespace ModuloServicosCliente.Workers
 
         protected abstract Task JobHandler(IJobClient jobClient, IJob activatedJob);
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
             await Task.Run(() =>
             {
@@ -27,7 +27,7 @@ namespace ModuloServicosCliente.Workers
                     logger.LogInformation("Started job: " + JobType);
                     do
                     {
-                    } while (!stoppingToken.IsCancellationRequested);
+                    } while (!cancellationToken.IsCancellationRequested);
                 }
             });
         }

@@ -29,14 +29,19 @@ namespace ModuloServicosCliente.Workers
                 logger.LogInformation($"{activatedJob}: Processando job.");
 
                 var variables = JsonSerializer.Deserialize<Dictionary<string, string>>(activatedJob.Variables);
-                int clienteId = Convert.ToInt32(variables["clienteid"]);
+                int clienteId = Convert.ToInt32(variables["clienteId"]);
+
                 logger.LogInformation($"{activatedJob}: Buscando dados do cliente {clienteId}");
 
                 ClienteDTO cliente = await clienteService.ObterClienteAsync(clienteId);
+                string clienteJson = JsonSerializer.Serialize(cliente);
+
+                logger.LogInformation($"{activatedJob}: Recebido dados do cliente {clienteId}: {clienteJson}");
 
                 await jobClient.NewCompleteJobCommand(activatedJob.Key)
-                    .Variables(JsonSerializer.Serialize(cliente)).Send();
-            } catch (Exception ex)
+                    .Variables(clienteJson).Send();
+            } 
+            catch (Exception ex)
             {
                 logger.LogError($"{activatedJob}: Erro durante processamento. {ex.Message}.", ex);
                 await jobClient.NewThrowErrorCommand(activatedJob.Key).ErrorCode("500").Send();

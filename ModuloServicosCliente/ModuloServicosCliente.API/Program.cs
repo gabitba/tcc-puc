@@ -1,20 +1,8 @@
 using Microsoft.OpenApi.Models;
 using ModuloInformacoesCadastrais.Infra.IoC;
-using ModuloServicosCliente.Application.Interfaces;
-using ModuloServicosCliente.Infra.Options;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.Configure<CamundaCloudClientOptions>(
-  builder.Configuration.GetSection(CamundaCloudClientOptions.ConfigName));
-builder.Services.Configure<CamundaCloudWorkerOptions>(
-  builder.Configuration.GetSection(CamundaCloudWorkerOptions.ConfigName));
-builder.Services.Configure<ClienteAPIOptions>(
-  builder.Configuration.GetSection(ClienteAPIOptions.ConfigName));
-
-builder.Services.AddHttpClient<IClienteService>();
-
 
 InjetorDeDependencias.ConfigurarDependencias(builder.Services, builder.Configuration);
 
