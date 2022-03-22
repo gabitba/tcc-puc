@@ -24,7 +24,7 @@ namespace ModuloServicosCliente.API.Controllers
         /// <response code="200">Instancia criada.</response>
         /// <response code="400">Falta dados para criação da instancia.</response>
         /// <response code="500">Houve erro na criação da instancia.</response>
-        [HttpPost]
+        [HttpPost("ProcessoReportCliente")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
@@ -62,7 +62,7 @@ namespace ModuloServicosCliente.API.Controllers
         /// <response code="200">Instancia criada.</response>
         /// <response code="400">Falta dados para criação da instancia.</response>
         /// <response code="500">Houve erro na criação da instancia.</response>
-        [HttpPost]
+        [HttpPost("Processo")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
