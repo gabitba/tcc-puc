@@ -1,6 +1,8 @@
-using static ModuloReport.API.EmailService;
+using Microsoft.AspNetCore.Mvc;
+using System.Text;
+using static ModuloEmail.API.EmailService;
 
-namespace ModuloReport.API.Controllers
+namespace ModuloEmail.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

@@ -1,4 +1,4 @@
-namespace ModuloReport.API
+namespace ModuloEmail.API
 {
     public class EnviarEmailReportClienteModelRequest
     {

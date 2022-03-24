@@ -1,4 +1,4 @@
-using ModuloReport.API;
+using ModuloEmail.API;
 
 var builder = WebApplication.CreateBuilder(args);
 
