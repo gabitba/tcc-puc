@@ -29,11 +29,6 @@ namespace ModuloEmail.API.Controllers
                 return BadRequest("Favor preencher a request.");
             }
 
-            if (string.IsNullOrWhiteSpace(request.Destinatario))
-            {
-                return BadRequest("Favor preencher o destinatário.");
-            }
-
             if (request.Cliente == null)
             {
                 return BadRequest("Favor preencher os dados de cliente.");

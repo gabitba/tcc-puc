@@ -17,9 +17,12 @@ namespace ModuloInformacoesCadastrais.Infra.IoC
                 configuration.GetSection(CamundaCloudWorkerOptions.ConfigName));
             servicos.Configure<ClienteAPIOptions>(
                 configuration.GetSection(ClienteAPIOptions.ConfigName));
+            servicos.Configure<EmailAPIOptions>(
+                configuration.GetSection(EmailAPIOptions.ConfigName));
 
             servicos.AddSingleton<IZeebeService, ZeebeService>();
             servicos.AddHttpClient<IClienteService, ClienteService>();
+            servicos.AddHttpClient<IEmailService, EmailService>();
         }
     }
 }

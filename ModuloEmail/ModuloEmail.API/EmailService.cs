@@ -7,16 +7,23 @@ namespace ModuloEmail.API
 {
     public class EmailService
     {
+        private readonly IOptions<EmailOptions> options;
         private readonly HttpClient httpClient;
 
         public EmailService(HttpClient httpClient, IOptions<EmailOptions> options)
         {
+            this.options = options;
             this.httpClient = httpClient;
             httpClient.BaseAddress = new Uri(options.Value.BaseUrl);
         }
 
         public async Task EnviarEmailAsync(EmailConteudo email)
         {
+            if(string.IsNullOrWhiteSpace(email.To))
+            {
+                email.To = options.Value.DestinatarioDefault;
+            }
+
             HttpContent content = new StringContent(JsonSerializer.Serialize(email), Encoding.UTF8, "application/json");
             await httpClient.PostAsync("", content);
         }

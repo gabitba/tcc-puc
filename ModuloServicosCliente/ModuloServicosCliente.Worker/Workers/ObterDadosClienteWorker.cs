@@ -32,20 +32,32 @@ namespace ModuloServicosCliente.Workers
                 int clienteId = Convert.ToInt32(variables["clienteId"]);
 
                 logger.LogInformation($"{activatedJob}: Buscando dados do cliente {clienteId}");
-
                 ClienteDTO cliente = await clienteService.ObterClienteAsync(clienteId);
-                string clienteJson = JsonSerializer.Serialize(cliente);
+                string clienteOutput = JsonSerializer.Serialize(new Output
+                {
+                    clienteId = cliente.Id,
+                    clienteNome = cliente.Nome,
+                    clienteEndereco = cliente.Endereco,
+                });
 
-                logger.LogInformation($"{activatedJob}: Recebido dados do cliente {clienteId}: {clienteJson}");
-
+                logger.LogInformation($"{activatedJob}: Obtido dados do cliente: {clienteOutput}");
                 await jobClient.NewCompleteJobCommand(activatedJob.Key)
-                    .Variables(clienteJson).Send();
+                    .Variables(clienteOutput).Send();
             } 
             catch (Exception ex)
             {
                 logger.LogError($"{activatedJob}: Erro durante processamento. {ex.Message}.", ex);
                 await jobClient.NewThrowErrorCommand(activatedJob.Key).ErrorCode("500").Send();
             }
+        }
+
+        internal class Output
+        {
+            public int clienteId { get; set; }
+
+            public string clienteNome { get; set; } = string.Empty;
+
+            public string clienteEndereco { get; set; } = string.Empty;
         }
     }
 }
