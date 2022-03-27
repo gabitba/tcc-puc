@@ -2,6 +2,6 @@
 {
     public static class ProcessosBPMN
     {
-        public const string ObterReportCliente = "obterReportCliente";
+        public const string EnviarReportCliente = "enviarReportCliente";
     }
 }

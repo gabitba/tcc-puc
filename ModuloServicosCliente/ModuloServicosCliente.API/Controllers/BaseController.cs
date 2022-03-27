@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace ModuloServicosCliente.API.Controllers
 {
@@ -13,8 +14,13 @@ namespace ModuloServicosCliente.API.Controllers
 
         protected ObjectResult HandleError(Exception ex)
         {
-            logger.LogError(ex.Message, ex.StackTrace);
+            logger.LogError(RemoveSpecialCharacters(ex.Message), ex.StackTrace);
             return StatusCode(500, "Erro inesperado.");
+        }
+
+        static string RemoveSpecialCharacters(string str)
+        {
+            return Regex.Replace(str, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
         }
     }
 }

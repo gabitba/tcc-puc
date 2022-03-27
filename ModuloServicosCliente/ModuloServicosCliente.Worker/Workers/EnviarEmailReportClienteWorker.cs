@@ -32,10 +32,11 @@ namespace ModuloServicosCliente.Workers
                 int clienteId = Convert.ToInt32(variables["clienteId"]);
                 string clienteNome = variables["clienteNome"];
                 string clienteEndereco = variables["clienteEndereco"];
+                string destinatario = variables["destinatario"];
 
                 logger.LogInformation($"{activatedJob}: Enviando e-mail de report do cliente {clienteId}");
 
-                await emailService.EnviarEmailReportCliente(new ClienteDTO
+                await emailService.EnviarEmailReportCliente(destinatario, new ClienteDTO
                 {
                     Id = clienteId,
                     Nome = clienteNome,

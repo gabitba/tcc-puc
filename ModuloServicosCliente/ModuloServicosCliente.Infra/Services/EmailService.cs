@@ -17,10 +17,11 @@ namespace ModuloServicosCliente.Infra.Services
             httpClient.BaseAddress = new Uri(options.Value.BaseUrl);
         }
 
-        public async Task EnviarEmailReportCliente(ClienteDTO cliente)
+        public async Task EnviarEmailReportCliente(string destinatario, ClienteDTO cliente)
         {
             var request = new EnviarEmailReportClienteModelRequest
             {
+                Destinatario = destinatario,
                 Cliente = cliente,
             };
 

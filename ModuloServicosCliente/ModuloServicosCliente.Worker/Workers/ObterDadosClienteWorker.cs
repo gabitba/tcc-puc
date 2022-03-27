@@ -35,9 +35,10 @@ namespace ModuloServicosCliente.Workers
                 ClienteDTO cliente = await clienteService.ObterClienteAsync(clienteId);
                 string clienteOutput = JsonSerializer.Serialize(new Output
                 {
-                    clienteId = cliente.Id,
-                    clienteNome = cliente.Nome,
-                    clienteEndereco = cliente.Endereco,
+                    Destinatario = variables["destinatario"],
+                    ClienteId = cliente.Id,
+                    ClienteNome = cliente.Nome,
+                    ClienteEndereco = cliente.Endereco,
                 });
 
                 logger.LogInformation($"{activatedJob}: Obtido dados do cliente: {clienteOutput}");
@@ -53,11 +54,13 @@ namespace ModuloServicosCliente.Workers
 
         internal class Output
         {
-            public int clienteId { get; set; }
+            public string Destinatario { get; set; }
 
-            public string clienteNome { get; set; } = string.Empty;
+            public int ClienteId { get; set; }
 
-            public string clienteEndereco { get; set; } = string.Empty;
+            public string ClienteNome { get; set; } = string.Empty;
+
+            public string ClienteEndereco { get; set; } = string.Empty;
         }
     }
 }

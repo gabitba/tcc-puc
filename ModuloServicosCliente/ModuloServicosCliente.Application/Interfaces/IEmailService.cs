@@ -4,6 +4,6 @@ namespace ModuloServicosCliente.Application.Interfaces
 {
     public interface IEmailService
     {
-        Task EnviarEmailReportCliente(ClienteDTO cliente);
+        Task EnviarEmailReportCliente(string destinatario, ClienteDTO cliente);
     }
 }

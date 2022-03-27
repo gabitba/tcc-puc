@@ -18,17 +18,24 @@ namespace ModuloServicosCliente.Infra.Interfaces
         {
             this.workerOptions = workerOptions;
 
-            client = CamundaCloudClientBuilder
+            // Usar esse client builder quando for usar o camunda cloud SaaS
+            //client = CamundaCloudClientBuilder
+            //.Builder()
+            //.UseClientId(clientOptions.Value.ClientId)
+            //.UseClientSecret(clientOptions.Value.ClientSecret)
+            //.UseContactPoint(clientOptions.Value.ContactPoint)
+            //.UseAuthServer(clientOptions.Value.AuthServer)
+            //.UseLoggerFactory(LoggerFactory) // optional
+            //.Build();
+
+            client = ZeebeClient
                 .Builder()
-                .UseClientId(clientOptions.Value.ClientId)
-                .UseClientSecret(clientOptions.Value.ClientSecret)
-                .UseContactPoint(clientOptions.Value.ContactPoint)
-                .UseAuthServer(clientOptions.Value.AuthServer)
-                //.UseLoggerFactory(LoggerFactory) // optional
+                .UseGatewayAddress(clientOptions.Value.ContactPoint)
+                .UsePlainText()
                 .Build();
         }
 
-        public async Task<IProcessInstanceResponse> ComecarInstanciaProcessoAsync(string bpmnProcessId, IDictionary<string, string> variablesJson)
+        public async Task<IProcessInstanceResponse> StartInstanciaProcessoAsync(string bpmnProcessId, IDictionary<string, string> variablesJson)
         {
             string variables = JsonSerializer.Serialize(variablesJson);
             return await client
@@ -50,5 +57,11 @@ namespace ModuloServicosCliente.Infra.Interfaces
                 .Name(workerName)
                 .Open();
         }
+
+        public async Task DeployInstanciaProcessoAsync(string idProcesso)
+        {
+            await client.NewDeployCommand().AddResourceFile($"BPMN/{idProcesso}.bpmn").Send();
+        }
+
     }
 }
