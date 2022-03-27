@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ModuloReport.API/ModuloReport.API.csproj", "ModuloReport.API/"]
-RUN dotnet restore "ModuloReport.API/ModuloReport.API.csproj"
+COPY ["ModuloEmail.API/ModuloEmail.API.csproj", "ModuloEmail.API/"]
+RUN dotnet restore "ModuloEmail.API/ModuloEmail.API.csproj"
 COPY . .
-WORKDIR "/src/ModuloReport.API"
-RUN dotnet build "ModuloReport.API.csproj" -c Release -o /app/build
+WORKDIR "/src/ModuloEmail.API"
+RUN dotnet build "ModuloEmail.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ModuloReport.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "ModuloEmail.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ModuloReport.API.dll"]
+ENTRYPOINT ["dotnet", "ModuloEmail.API.dll"]

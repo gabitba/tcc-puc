@@ -24,7 +24,7 @@ namespace ModuloEmail.API
                 email.To = options.Value.DestinatarioDefault;
             }
 
-            HttpContent content = new StringContent(JsonSerializer.Serialize(email), Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent(JsonSerializer.Serialize(email), Encoding.ASCII, "application/json");
             await httpClient.PostAsync("", content);
         }
 
