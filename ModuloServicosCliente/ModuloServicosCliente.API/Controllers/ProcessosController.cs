@@ -1,17 +1,17 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ModuloServicosCliente.API.Models;
 using ModuloServicosCliente.Application.Interfaces;
 
 namespace ModuloServicosCliente.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
-    public class ProcessoController : BaseController
+    [Route("api/[controller]")]
+    public class ProcessosController : BaseController
     {
-        private readonly ILogger<ProcessoController> logger;
+        private readonly ILogger<ProcessosController> logger;
         private readonly IZeebeService camundaService;
 
-        public ProcessoController(ILogger<ProcessoController> logger, IZeebeService camundaService) : base(logger)
+        public ProcessosController(ILogger<ProcessosController> logger, IZeebeService camundaService) : base(logger)
         {
             this.logger = logger;
             this.camundaService = camundaService;
@@ -33,7 +33,7 @@ namespace ModuloServicosCliente.API.Controllers
 
             try
             {
-                await camundaService.DeployInstanciaProcessoAsync(ProcessosBPMN.EnviarReportCliente);
+                await camundaService.DeployInstanciaProcessoAsync($"Bpmn/{ProcessosBpmn.EnviarReportCliente}.bpmn");
                 return Ok();
             }
             catch (Exception ex)

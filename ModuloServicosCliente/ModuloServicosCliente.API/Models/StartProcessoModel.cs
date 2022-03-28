@@ -2,7 +2,7 @@
 
 namespace ModuloServicosCliente.API.Models
 {
-    public class StartProcessoRequestModel
+    public class StartInstanciaProcessoRequestModel
     {
         [Required]
         public string IdProcesso { get; set; } = string.Empty;
@@ -10,7 +10,7 @@ namespace ModuloServicosCliente.API.Models
         public Dictionary<string, string> Variaveis { get; set; } = new Dictionary<string, string>();
     }
 
-    public class StartProcessoResponseModel
+    public class StartInstanciaProcessoResponseModel
     {
         public string IdProcesso { get; internal set; } = string.Empty;
         public long KeyInstancia { get; internal set; }
