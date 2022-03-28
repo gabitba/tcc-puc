@@ -4,7 +4,7 @@ using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-InjetorDeDependencias.ConfigurarDependencias(builder.Services, builder.Configuration);
+InjetorDeDependencias.ConfigurarCamundaService(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
 

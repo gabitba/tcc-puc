@@ -6,8 +6,9 @@ namespace ModuloServicosCliente.Application.Interfaces
     public interface IZeebeService
     {
         IJobWorker CriarWorker(string tipoJob, AsyncJobHandler jobHandler, string nomeWorker);
+
         Task<IProcessInstanceResponse> StartInstanciaProcessoAsync(string idProcesso, IDictionary<string, string> variaveis);
 
-        Task DeployInstanciaProcessoAsync(string idProcesso);
+        Task DeployInstanciaProcessoAsync(string fileBpmn);
     }
 }
