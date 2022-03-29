@@ -24,8 +24,12 @@ namespace ModuloEmail.API
                 email.To = options.Value.DestinatarioDefault;
             }
 
-            HttpContent content = new StringContent(JsonSerializer.Serialize(email), Encoding.ASCII, "application/json");
-            await httpClient.PostAsync("", content);
+            HttpContent content = new StringContent(JsonSerializer.Serialize(email), Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("", content);
+            if(!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Falha ao enviar e-mail: {response.Content}.");
+            }
         }
 
         public class EmailConteudo

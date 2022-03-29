@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "ModuloReport.API": {
+    "ModuloEmail.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
