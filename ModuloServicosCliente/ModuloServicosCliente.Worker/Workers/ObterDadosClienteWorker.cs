@@ -1,6 +1,7 @@
 using ModuloServicosCliente.Application.DTOs;
 using ModuloServicosCliente.Application.Interfaces;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Zeebe.Client.Api.Responses;
 using Zeebe.Client.Api.Worker;
 
@@ -35,8 +36,6 @@ namespace ModuloServicosCliente.Workers
                 ClienteDTO cliente = await clienteService.ObterClienteAsync(clienteId);
                 string clienteOutput = JsonSerializer.Serialize(new Output
                 {
-                    Destinatario = variables["destinatario"],
-                    ClienteId = cliente.Id,
                     ClienteNome = cliente.Nome,
                     ClienteEndereco = cliente.Endereco,
                 });
@@ -54,12 +53,10 @@ namespace ModuloServicosCliente.Workers
 
         internal class Output
         {
-            public string Destinatario { get; set; }
-
-            public int ClienteId { get; set; }
-
+            [JsonPropertyName("clienteNome")]
             public string ClienteNome { get; set; } = string.Empty;
 
+            [JsonPropertyName("clienteEndereco")]
             public string ClienteEndereco { get; set; } = string.Empty;
         }
     }
