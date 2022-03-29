@@ -26,7 +26,11 @@ namespace ModuloServicosCliente.Infra.Services
             };
 
             HttpContent content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            await httpClient.PostAsync("Email/ReportCliente", content);
+            var response = await httpClient.PostAsync("api/Email/ReportCliente", content);
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Falha ao enviar e-mail: {response.Content}.");
+            }
         }
 
         internal class EnviarEmailReportClienteModelRequest

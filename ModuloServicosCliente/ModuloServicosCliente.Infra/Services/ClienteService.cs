@@ -18,7 +18,7 @@ namespace ModuloServicosCliente.Infra.Services
 
         public async Task<ClienteDTO> ObterClienteAsync(int id)
         {
-            return await httpClient.GetFromJsonAsync<ClienteDTO>($"clientes/{id}");
+            return await httpClient.GetFromJsonAsync<ClienteDTO>($"api/Clientes/{id}");
         }
     }
 }
