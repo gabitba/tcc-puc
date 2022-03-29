@@ -20,16 +20,15 @@ namespace ModuloServicosCliente.Workers
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
-            await Task.Run(() =>
+            using (camundaService.CriarWorker(JobType, JobHandler, JobType))
             {
-                using (camundaService.CriarWorker(JobType, JobHandler, JobType))
+                logger.LogInformation("Started job: " + JobType);
+
+                while (!cancellationToken.IsCancellationRequested)
                 {
-                    logger.LogInformation("Started job: " + JobType);
-                    do
-                    {
-                    } while (!cancellationToken.IsCancellationRequested);
+                    await Task.Delay(1000, cancellationToken);
                 }
-            });
+            }
         }
     }
 }
