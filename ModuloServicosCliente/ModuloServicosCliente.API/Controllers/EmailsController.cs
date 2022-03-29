@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ModuloServicosCliente.API.Models;
 using ModuloServicosCliente.Application.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace ModuloServicosCliente.API.Controllers
 {
@@ -32,6 +33,18 @@ namespace ModuloServicosCliente.API.Controllers
         public async Task<ActionResult<StartInstanciaProcessoResponseModel>> EnviarReportClienteAsync([FromBody] EnviarReportClienteModelRequest request)
         {
             logger.LogInformation($"Nova requisicao {nameof(EnviarReportClienteAsync)}.", request);
+
+            if(request.ClienteId <= 0)
+            {
+                return BadRequest("Id do cliente inválido");
+            }
+
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(request.Destinatario);
+            if (!match.Success)
+            {
+                return BadRequest("E-mail do destinatário inválido");
+            }
 
             try
             {
