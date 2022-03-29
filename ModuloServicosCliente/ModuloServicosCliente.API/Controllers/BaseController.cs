@@ -20,7 +20,7 @@ namespace ModuloServicosCliente.API.Controllers
 
         static string RemoveSpecialCharacters(string str)
         {
-            return Regex.Replace(str, "[^a-zA-Z0-9_.]+", "", RegexOptions.Compiled);
+            return Regex.Replace(str, "[^a-zA-Z0-9_. ;]+", "", RegexOptions.Compiled);
         }
     }
 }
