@@ -23,7 +23,7 @@ namespace ModuloServicosCliente.API.Controllers
         /// </summary>
         /// <response code="200">Deploy realizado.</response>
         /// <response code="500">Houve erro no deploy.</response>
-        [HttpPost("Report/Cliente")]
+        [HttpPost("EmailReportCliente")]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Produces("application/json")]

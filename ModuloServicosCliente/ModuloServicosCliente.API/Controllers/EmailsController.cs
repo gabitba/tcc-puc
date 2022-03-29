@@ -6,12 +6,12 @@ namespace ModuloServicosCliente.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ReportsController : BaseController
+    public class EmailsController : BaseController
     {
-        private readonly ILogger<ReportsController> logger;
+        private readonly ILogger<EmailsController> logger;
         private readonly IZeebeService camundaService;
 
-        public ReportsController(ILogger<ReportsController> logger, IZeebeService camundaService) : base(logger)
+        public EmailsController(ILogger<EmailsController> logger, IZeebeService camundaService) : base(logger)
         {
             this.logger = logger;
             this.camundaService = camundaService;
@@ -24,25 +24,20 @@ namespace ModuloServicosCliente.API.Controllers
         /// <response code="200">Enviada a instancia de processo.</response>
         /// <response code="400">Falta dados para envio da instancia.</response>
         /// <response code="500">Houve erro no envio da instancia.</response>
-        [HttpPost("Cliente/{clienteId}")]
+        [HttpPost("ReportCliente")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [Produces("application/json")]
-        public async Task<ActionResult<StartInstanciaProcessoResponseModel>> EnviarReportClienteAsync([FromRoute] int clienteId, [FromBody] string destinatario)
+        public async Task<ActionResult<StartInstanciaProcessoResponseModel>> EnviarReportClienteAsync([FromBody] EnviarReportClienteModelRequest request)
         {
-            logger.LogInformation($"Nova requisicao {nameof(EnviarReportClienteAsync)}.", clienteId);
-
-            if (string.IsNullOrWhiteSpace(destinatario))
-            {
-                return BadRequest("Precisa preencher o destinatario do e-mail.");
-            }
+            logger.LogInformation($"Nova requisicao {nameof(EnviarReportClienteAsync)}.", request);
 
             try
             {
                 var variaveis = new Dictionary<string, string>();
-                variaveis.Add("clienteId", clienteId.ToString());
-                variaveis.Add("destinatario", destinatario);
+                variaveis.Add("clienteId", request.ClienteId.ToString());
+                variaveis.Add("destinatario", request.Destinatario);
 
                 var instancia = await camundaService.StartInstanciaProcessoAsync(ProcessosBpmn.EnviarReportCliente, variaveis);
 
