@@ -16,6 +16,10 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=2.99.0"
     }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "=2.19.1"
+    }
   }
 
   required_version = ">= 1.1.0"
@@ -33,6 +37,10 @@ provider "azurerm" {
   }
 }
 
+provider "azuread" {
+  tenant_id = var.tenantId
+}
+
 data "azurerm_resource_group" "tccpuc" {
   name = "TCC-PUC"
 }
@@ -47,12 +55,11 @@ resource "azurerm_log_analytics_workspace" "boaentrega" {
   }
 }
 
-module "mic" {
-  source                  = "./modules/mic"
-  companyName             = var.companyName
-  resourceGroupName       = data.azurerm_resource_group.tccpuc.name
-  location                = data.azurerm_resource_group.tccpuc.location
-  logAnalyticsWorkspaceId = azurerm_log_analytics_workspace.boaentrega.id
+module "applicationobject" {
+  source             = "./modules/applicationobject"
+  companyName        = var.companyName
+  companyDisplayName = var.companyDisplayName
+  micServiceName     = var.micAppName
 }
 
 module "apiboaentrega" {
@@ -64,6 +71,6 @@ module "apiboaentrega" {
   location                = data.azurerm_resource_group.tccpuc.location
   logAnalyticsWorkspaceId = azurerm_log_analytics_workspace.boaentrega.id
   publisherEmail          = var.publisherEmail
-  micServiceName          = module.mic.appName
+  micServiceName          = var.micAppName
   micApiPath              = "api"
 }

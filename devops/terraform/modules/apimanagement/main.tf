@@ -1,5 +1,5 @@
 resource "azurerm_application_insights" "apiboaentrega" {
-  name                = "apm-apiboaentrega"
+  name                = "apiboaentregaappinsights"
   location            = var.location
   resource_group_name = var.resourceGroupName
   workspace_id        = var.logAnalyticsWorkspaceId
@@ -10,13 +10,17 @@ resource "azurerm_application_insights" "apiboaentrega" {
 }
 
 resource "azurerm_api_management" "boaentrega" {
-  name                = "api-${var.companyName}"
+  name                = "api${var.companyName}"
   location            = var.location
   resource_group_name = var.resourceGroupName
   publisher_name      = var.companyDisplayName
   publisher_email     = var.publisherEmail
 
   sku_name = "Consumption_0"
+
+  identity {
+    type = "SystemAssigned"
+  }
 
   tags = {
     "terraform" = "true"
@@ -30,23 +34,36 @@ resource "azurerm_api_management_api" "mic" {
   revision            = "1"
   display_name        = "API Módulo de Informações Cadastrais"
   path                = "mic"
-  protocols           = ["https", "http"]
+  protocols           = ["https"]
 
   import {
-    content_format = "swagger-link-json"
-    content_value  = "http://conferenceapi.azurewebsites.net/?format=json"
-    # content_value  = "http://${var.micServiceName}.azurewebsites.net/${var.micApiPath}?format=json"
+    content_format = "openapi-link"
+    content_value  = "https://${var.micServiceName}.azurewebsites.net/swagger/v1/swagger.json"
   }
 }
 
 resource "azurerm_api_management_backend" "mic" {
-  name                = "backend-mic"
+  name                = "WebApp_${var.micServiceName}"
   resource_group_name = var.resourceGroupName
   api_management_name = azurerm_api_management.boaentrega.name
+  description         = var.micServiceName
   title               = "MIC Backend"
   resource_id         = "https://management.azure.com/subscriptions/${var.subscriptionId}/resourceGroups/${var.resourceGroupName}/providers/Microsoft.Web/sites/${var.micServiceName}"
   protocol            = "http"
   url                 = "http://${var.micServiceName}.azurewebsites.net/"
+}
+
+resource "azurerm_api_management_policy" "mic" {
+  api_management_id = azurerm_api_management.boaentrega.id
+  xml_content       = <<XML
+<policies>
+  <inbound/>
+  <backend>
+    <forward-request/>
+  </backend>
+  <outbound/>
+</policies>
+XML
 }
 
 resource "azurerm_api_management_api_policy" "mic" {
