@@ -9,7 +9,7 @@ resource "azuread_service_principal" "msgraph" {
 
 resource "azuread_application" "client_app" {
   display_name     = "${var.companyDisplayName} Client App"
-  identifier_uris  = ["api://${var.companyName}-clientapp"]
+  identifier_uris  = ["api://${var.companyName}-clientapi"]
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 
