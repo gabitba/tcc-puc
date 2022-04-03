@@ -12,6 +12,7 @@
     <PackageReference Include="zb-client" Version="1.2.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ModuloServicosCliente.Infra\ModuloServicosCliente.Infra.csproj" />
+    <ProjectReference Include="..\ModuloServicosCliente.Infra.IoC\ModuloServicosCliente.Infra.IoC.csproj" />
+    <ProjectReference Include="..\ModuloServicosCliente.Infra\ModuloServicosCliente.Infra.Data.csproj" />
   </ItemGroup>
 </Project>

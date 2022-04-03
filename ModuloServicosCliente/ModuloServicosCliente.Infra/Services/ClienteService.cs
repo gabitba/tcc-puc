@@ -6,7 +6,7 @@ using System.Net.Http.Json;
 
 namespace ModuloServicosCliente.Infra.Services
 {
-    internal class ClienteService : IClienteService
+    public class ClienteService : IClienteService
     {
         private readonly HttpClient httpClient;
 

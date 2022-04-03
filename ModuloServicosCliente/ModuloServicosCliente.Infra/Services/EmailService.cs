@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace ModuloServicosCliente.Infra.Services
 {
-    internal class EmailService : IEmailService
+    public class EmailService : IEmailService
     {
         private readonly HttpClient httpClient;
 

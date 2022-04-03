@@ -1,5 +1,5 @@
 using Microsoft.OpenApi.Models;
-using ModuloInformacoesCadastrais.Infra.IoC;
+using ModuloServicosCliente.Infra.IoC;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);

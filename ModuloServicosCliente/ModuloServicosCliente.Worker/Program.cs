@@ -1,4 +1,4 @@
-using ModuloInformacoesCadastrais.Infra.IoC;
+using ModuloServicosCliente.Infra.IoC;
 using ModuloServicosCliente.Workers;
 
 IHostBuilder builder = Host.CreateDefaultBuilder(args)

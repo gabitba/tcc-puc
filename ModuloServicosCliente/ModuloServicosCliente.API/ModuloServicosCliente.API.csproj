@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ModuloServicosCliente.Application\ModuloServicosCliente.Application.csproj" />
-		<ProjectReference Include="..\ModuloServicosCliente.Infra\ModuloServicosCliente.Infra.csproj" />
+		<ProjectReference Include="..\ModuloServicosCliente.Infra.IoC\ModuloServicosCliente.Infra.IoC.csproj" />
 	</ItemGroup>
 
 </Project>

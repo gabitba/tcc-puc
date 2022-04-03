@@ -4,7 +4,7 @@ using ModuloServicosCliente.Application.Interfaces;
 using ModuloServicosCliente.Infra.Options;
 using ModuloServicosCliente.Infra.Services;
 
-namespace ModuloInformacoesCadastrais.Infra.IoC
+namespace ModuloServicosCliente.Infra.IoC
 {
     public static class InjetorDeDependencias
     {
