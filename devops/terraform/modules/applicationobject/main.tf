@@ -44,9 +44,7 @@ resource "azuread_application" "client_app" {
       admin_consent_display_name = "Write client information"
       enabled                    = true
       id                         = "792c1c1d-7c8f-48c0-9a8d-a3438abc99a2"
-      type                       = "User"
-      user_consent_description   = "Allow the application to write client information."
-      user_consent_display_name  = "Write client information"
+      type                       = "Admin"
       value                      = "Client.Write"
     }
   }
@@ -85,7 +83,7 @@ resource "azuread_application" "client_app" {
 
   web {
     logout_url    = "https://${var.micServiceName}.azurewebsites.net/.auth/logout"
-    redirect_uris = ["https://${var.micServiceName}.azurewebsites.net/.auth/login/aad/callback"]
+    redirect_uris = ["https://${var.micServiceName}.azurewebsites.net/.auth/login/aad/callback", "https://localhost:7013/swagger/oauth2-redirect.html"]
     implicit_grant {
       access_token_issuance_enabled = true
       id_token_issuance_enabled     = true
