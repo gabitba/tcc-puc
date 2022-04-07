@@ -10,7 +10,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/Clientes/ComAutorizacao")]
+    [Route("api/ClientesComAutorizacao")]
     public class ClientesWithAuthController : BaseController
     {
         private readonly ILogger<ClientesController> logger;
