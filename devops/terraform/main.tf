@@ -55,11 +55,19 @@ resource "azurerm_log_analytics_workspace" "boaentrega" {
   }
 }
 
-module "applicationobject" {
-  source             = "./modules/applicationobject"
+module "micapplicationobject" {
+  source             = "./modules/micapplicationobject"
   companyName        = var.companyName
   companyDisplayName = var.companyDisplayName
   micServiceName     = var.micAppName
+}
+
+module "micapplicationobjectclient" {
+  source             = "./modules/micapplicationobjectclient"
+  companyName        = var.companyName
+  companyDisplayName = var.companyDisplayName
+  micServiceName     = var.micAppName
+  micAppClientId     = module.micapplicationobject.micAppApplicationClientId
 }
 
 module "apiboaentrega" {

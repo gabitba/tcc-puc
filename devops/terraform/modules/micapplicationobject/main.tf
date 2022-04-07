@@ -7,9 +7,9 @@ resource "azuread_service_principal" "msgraph" {
   use_existing   = true
 }
 
-resource "azuread_application" "client_app" {
-  display_name     = "${var.companyDisplayName} Client App"
-  identifier_uris  = ["api://${var.companyName}-clientapi"]
+resource "azuread_application" "mic_app" {
+  display_name     = "${var.companyDisplayName} MIC App"
+  identifier_uris  = ["api://${var.companyName}-micapi"]
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 
@@ -18,13 +18,13 @@ resource "azuread_application" "client_app" {
     requested_access_token_version = 2
 
     oauth2_permission_scope {
-      admin_consent_description  = "Allow the application to access the ${var.companyDisplayName} Client App on behalf of the user."
-      admin_consent_display_name = "Access ${var.companyDisplayName} Client App"
+      admin_consent_description  = "Allow the application to access the ${var.companyDisplayName} MIC App on behalf of the user."
+      admin_consent_display_name = "Access ${var.companyDisplayName} MIC App"
       enabled                    = true
       id                         = "c38ee7b0-6e7e-4741-82a4-ed4aeb1bbcfe"
       type                       = "User"
-      user_consent_description   = "Allow the application to access the ${var.companyDisplayName} Client App on your behalf."
-      user_consent_display_name  = "Access ${var.companyDisplayName} Client App"
+      user_consent_description   = "Allow the application to access the ${var.companyDisplayName} MIC App on your behalf."
+      user_consent_display_name  = "Access ${var.companyDisplayName} MIC App"
       value                      = "user_impersonation"
     }
 
@@ -91,14 +91,14 @@ resource "azuread_application" "client_app" {
   }
 }
 
-resource "azuread_service_principal" "client_app" {
-  application_id = azuread_application.client_app.application_id
+resource "azuread_service_principal" "mic_app" {
+  application_id = azuread_application.mic_app.application_id
   login_url      = "https://${var.micServiceName}.azurewebsites.net/.auth/login/aad"
   owners         = [data.azuread_client_config.current.object_id]
 }
 
-resource "azuread_service_principal_delegated_permission_grant" "client_app" {
-  service_principal_object_id          = azuread_service_principal.client_app.object_id
+resource "azuread_service_principal_delegated_permission_grant" "mic_app" {
+  service_principal_object_id          = azuread_service_principal.mic_app.object_id
   resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
   claim_values                         = ["openid", "User.Read.All"]
 }
