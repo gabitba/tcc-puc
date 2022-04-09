@@ -82,8 +82,13 @@ resource "azuread_application" "mic_app" {
   }
 
   web {
-    logout_url    = "https://${var.micServiceName}.azurewebsites.net/.auth/logout"
-    redirect_uris = ["https://${var.micServiceName}.azurewebsites.net/.auth/login/aad/callback", "https://localhost:7013/swagger/oauth2-redirect.html", "https://oauth.pstmn.io/v1/browser-callback"]
+    logout_url = "https://${var.micServiceName}.azurewebsites.net/.auth/logout"
+    redirect_uris = [
+      "https://${var.micServiceName}.azurewebsites.net/.auth/login/aad/callback",
+      "https://${var.micServiceName}.azurewebsites.net/swagger/oauth2-redirect.html",
+      "https://localhost:7013/swagger/oauth2-redirect.html",
+      "https://oauth.pstmn.io/v1/browser-callback"
+    ]
     implicit_grant {
       access_token_issuance_enabled = true
       id_token_issuance_enabled     = true
