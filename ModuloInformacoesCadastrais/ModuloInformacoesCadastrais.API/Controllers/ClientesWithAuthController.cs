@@ -10,13 +10,13 @@ namespace ModuloInformacoesCadastrais.API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/ClientesComAutorizacao")]
-    public class ClientesWithAuthController : BaseController
+    [Route("api/[controller]")]
+    public class ClientesComAutorizacaoController : BaseController
     {
         private readonly ILogger<ClientesController> logger;
         private readonly IClientesService clientesServico;
 
-        public ClientesWithAuthController(ILogger<ClientesController> logger, IClientesService clientesServico) : base(logger)
+        public ClientesComAutorizacaoController(ILogger<ClientesController> logger, IClientesService clientesServico) : base(logger)
         {
             this.logger = logger;
             this.clientesServico = clientesServico;
