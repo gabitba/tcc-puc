@@ -9,7 +9,6 @@ resource "azuread_service_principal" "msgraph" {
 
 data "azuread_application" "mic_app" {
   application_id = var.micAppClientId
-  use_existing   = true
 }
 
 resource "azuread_application" "mic_app_read_client" {
@@ -40,7 +39,7 @@ resource "azuread_application" "mic_app_read_client" {
     }
 
     resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["Client.Read.All"]
+      id   = data.azuread_application.mic_app.app_role_ids["Client.Read.All"]
       type = "Role"
     }
   }
@@ -51,13 +50,13 @@ resource "azuread_service_principal" "mic_app_read_client" {
   owners         = [data.azuread_client_config.current.object_id]
 }
 
-resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client" {
+resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client_msgraph" {
   service_principal_object_id          = azuread_service_principal.mic_app_read_client.object_id
   resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
   claim_values                         = ["openid", "User.Read.All"]
 }
 
-resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client" {
+resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client_micapp" {
   service_principal_object_id          = azuread_service_principal.mic_app_read_client.object_id
   resource_service_principal_object_id = data.azuread_application.mic_app.object_id
   claim_values                         = ["Client.Read", "Client.Read.All"]
@@ -91,7 +90,7 @@ resource "azuread_application" "mic_app_write_client" {
     }
 
     resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["Client.Write.All"]
+      id   = data.azuread_application.mic_app.app_role_ids["Client.Write.All"]
       type = "Role"
     }
   }
@@ -102,13 +101,13 @@ resource "azuread_service_principal" "mic_app_write_client" {
   owners         = [data.azuread_client_config.current.object_id]
 }
 
-resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client" {
+resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client_msgraph" {
   service_principal_object_id          = azuread_service_principal.mic_app_write_client.object_id
   resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
   claim_values                         = ["openid", "User.Read.All"]
 }
 
-resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client" {
+resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client_micapp" {
   service_principal_object_id          = azuread_service_principal.mic_app_write_client.object_id
   resource_service_principal_object_id = data.azuread_application.mic_app.object_id
   claim_values                         = ["Client.Write", "Client.Write.All"]
