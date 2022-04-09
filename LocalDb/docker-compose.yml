@@ -1,7 +1,7 @@
 version: "3.9"
 services:
     db:
-        container_name: tcc_db
+        container_name: local_db
         build: .
         ports:
           - "1433:1433"
