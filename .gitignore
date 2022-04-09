@@ -432,3 +432,5 @@ baseline.json
 
 # Husky
 .husky/_
+UIs/modulo-clientes-ui/.browserslistrc
+UIs/modulo-clientes-ui/.editorconfig
