@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-clientes',
@@ -6,10 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./clientes.component.css']
 })
 export class ClientesComponent implements OnInit {
-
-  constructor() { }
+  moduloClientesUrl: SafeResourceUrl | undefined;
+  constructor(public sanitizer: DomSanitizer) {
+    this.moduloClientesUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.moduloClienteUrl)
+   }
 
   ngOnInit(): void {
   }
-
 }

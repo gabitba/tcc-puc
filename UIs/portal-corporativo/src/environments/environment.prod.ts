@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  moduloClienteUrl: "http://localhost:4201/"
 };
