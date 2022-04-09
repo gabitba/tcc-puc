@@ -28,13 +28,14 @@ resource "azurerm_api_management" "boaentrega" {
 }
 
 resource "azurerm_api_management_api" "mic" {
-  name                = "api-mic"
-  resource_group_name = var.resourceGroupName
-  api_management_name = azurerm_api_management.boaentrega.name
-  revision            = "1"
-  display_name        = "API Módulo de Informações Cadastrais"
-  path                = "mic"
-  protocols           = ["https"]
+  name                  = "api-mic"
+  resource_group_name   = var.resourceGroupName
+  api_management_name   = azurerm_api_management.boaentrega.name
+  revision              = "1"
+  display_name          = "API Módulo de Informações Cadastrais"
+  path                  = "mic"
+  protocols             = ["https"]
+  subscription_required = false
 
   import {
     content_format = "openapi-link"
