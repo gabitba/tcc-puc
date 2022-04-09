@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../environments/environment';
+import { environment } from '../environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ClientesService {
   constructor(private http: HttpClient) { }
   
   getListaClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(
-      `${environment.baseClientesApiUrl}/clientes`,
+      `${environment.baseClientesApiUrl}/Clientes`,
       {
         responseType: 'json'
       })
       .pipe(
-        retry(3), // retry a failed request up to 3 times
         catchError(this.handleError)
       )
   }
