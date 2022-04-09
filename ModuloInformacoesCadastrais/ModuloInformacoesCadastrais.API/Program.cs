@@ -42,7 +42,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
     string authBaseUrl = $"{builder.Configuration["AzureAD:Instance"]}/{builder.Configuration["AzureAD:TenantId"]}/oauth2/v2.0";
-    string audience = "api://boaentrega-clientapi";
+    string audience = "api://boaentrega-micapi";
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
