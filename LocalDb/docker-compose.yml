@@ -1,7 +1,6 @@
 version: "3.9"
 services:
-    db:
-        container_name: local_db
+    localdb:
         build: .
         ports:
           - "1433:1433"

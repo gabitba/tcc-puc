@@ -18,8 +18,8 @@ BEGIN
 END;
 
 BEGIN
-	INSERT INTO dbo.Clientes VALUES ('Saraiva', 'Rua Um, S„o LuÌs')
-	INSERT INTO dbo.Clientes (Nome, Endereco) VALUES ('Bonimo', 'Quadra 5, BrasÌlia')
-	INSERT INTO dbo.Clientes (Nome, Endereco) VALUES ('Sampaio', 'Rua Maria Eriv‚nia dos Santos, MaceiÛ')
+	INSERT INTO dbo.Clientes VALUES ('Saraiva', 'Rua Um, S√£o Lu√≠s')
+	INSERT INTO dbo.Clientes (Nome, Endereco) VALUES ('Bonimo', 'Quadra 5, Bras√≠lia')
+	INSERT INTO dbo.Clientes (Nome, Endereco) VALUES ('Sampaio', 'Rua Maria Eriv√¢nia dos Santos, Macei√≥')
 	INSERT INTO dbo.Clientes (Nome, Endereco) VALUES ('Norberto', 'Travessa Alvoredo, Rio Branco')
 END;
