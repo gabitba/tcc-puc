@@ -1,0 +1,7 @@
+mat-toolbar {
+    background-color: #d27619;
+}
+
+mat-toolbar > span {
+    color: white;
+}
