@@ -1,28 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Cliente, ClientesService } from './clientes.service';
 
 @Component({
   selector: 'app-lista-clientes',
   templateUrl: './lista-clientes.component.html',
   styleUrls: ['./lista-clientes.component.css']
 })
+@Injectable()
 export class ListaClientesComponent implements OnInit {
-
-  constructor() { }
+  constructor(private clientesService: ClientesService) { }
+  
+  clientes: Cliente[] = [] 
 
   ngOnInit(): void {
+    this.clientesService.getListaClientes().subscribe(
+      (clientes: Cliente[]) => this.clientes.push(...clientes)
+    )
   }
 
   displayedColumns = ['id', 'nome', 'endereco'];
-  dataSource = ELEMENT_DATA;
+  //clientes = ELEMENT_DATA;
 }
 
-export interface Element {
-  id: number;
-  nome: string;
-  endereco: string;
-}
-
-const ELEMENT_DATA: Element[] = [
+const CLIENTE_DATA: Cliente[] = [
   {id: 1, nome: 'Hydrogen', endereco: "1.0079"},
   {id: 2, nome: 'Helium', endereco: "4.0026"},
   {id: 3, nome: 'Lithium', endereco: "6.941"},
