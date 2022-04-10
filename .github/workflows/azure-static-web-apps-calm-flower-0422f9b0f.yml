@@ -3,7 +3,7 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     paths:
-      - 'portal-corporativo/**'
+      - 'UIs/portal-corporativo/**'
     branches:
       - use-case-3
   pull_request:
