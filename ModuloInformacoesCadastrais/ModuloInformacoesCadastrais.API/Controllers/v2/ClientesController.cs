@@ -6,17 +6,18 @@ using ModuloInformacoesCadastrais.API.Models;
 using ModuloInformacoesCadastrais.Application.DTOs;
 using ModuloInformacoesCadastrais.Application.Interfaces;
 
-namespace ModuloInformacoesCadastrais.API.Controllers
+namespace ModuloInformacoesCadastrais.API.Controllers.V2
 {
     [Authorize]
     [ApiController]
-    [Route("api/[controller]")]
-    public class ClientesComAutorizacaoController : BaseController
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
+    public class ClientesController : BaseController
     {
         private readonly ILogger<ClientesController> logger;
         private readonly IClientesService clientesServico;
 
-        public ClientesComAutorizacaoController(ILogger<ClientesController> logger, IClientesService clientesServico) : base(logger)
+        public ClientesController(ILogger<ClientesController> logger, IClientesService clientesServico) : base(logger)
         {
             this.logger = logger;
             this.clientesServico = clientesServico;
