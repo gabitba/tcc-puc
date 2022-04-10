@@ -8,7 +8,6 @@ namespace ModuloInformacoesCadastrais.API.Controllers.V1
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    [Route("api/[controller]")]
     public class ClientesController : BaseController
     {
         private readonly ILogger<ClientesController> logger;

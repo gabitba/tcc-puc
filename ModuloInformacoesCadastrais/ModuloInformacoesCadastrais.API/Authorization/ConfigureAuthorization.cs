@@ -7,7 +7,7 @@ namespace ModuloInformacoesCadastrais.API.Authorization
 {
     public static class ConfigureAuthorization
     {
-        public static IServiceCollection AddAuthorization(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddAndConfigureAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                                 .AddMicrosoftIdentityWebApi(configuration, jwtBearerScheme: JwtBearerDefaults.AuthenticationScheme);

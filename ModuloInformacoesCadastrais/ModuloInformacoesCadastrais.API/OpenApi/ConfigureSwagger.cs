@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using ModuloInformacoesCadastrais.API.Authorization;
+using Swashbuckle.AspNetCore.Filters;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace ModuloInformacoesCadastrais.API.OpenApi
 {
     public static class ConfigureSwagger
     {
-        public static void AddOpenApiSupport(this IServiceCollection services, IConfiguration configuration)
+        public static void AddAndConfigureOpenApiSupport(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
 
@@ -25,9 +26,15 @@ namespace ModuloInformacoesCadastrais.API.OpenApi
 
             services.AddSwaggerGen(options =>
             {
+                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+
+                options.OperationFilter<OperationDefaultValues>();
+                options.OperationFilter<SecurityRequirementsOperationFilter>();
+                options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
+
                 string authBaseUrl = $"{configuration["AzureAD:Instance"]}/{configuration["AzureAD:TenantId"]}/oauth2/v2.0";
                 string audience = "api://boaentrega-micapi";
-                options.OperationFilter<OperationDefaultValues>();
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Description = "OAuth2.0 Auth Code with PKCE",
@@ -47,29 +54,11 @@ namespace ModuloInformacoesCadastrais.API.OpenApi
                         }
                     }
                 });
-                options.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {
-                    {
-                        new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
-                        },
-                        new[] {
-                            AuthorizationResources.Client.Scope.Read,
-                            AuthorizationResources.Client.Scope.Write,
-                            AuthorizationResources.Client.Role.Read,
-                            AuthorizationResources.Client.Role.Write
-                        }
-                    }
-                });
-                var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
             });
         }
 
         public static void UseSwaggerApp(this WebApplication app)
         {
-
             app.UseSwagger(options => { options.RouteTemplate = "swagger/{documentName}/docs.json"; });
             app.UseSwaggerUI(options =>
             {

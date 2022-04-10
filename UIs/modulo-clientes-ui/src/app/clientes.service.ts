@@ -9,10 +9,10 @@ import { catchError, retry } from 'rxjs/operators';
 })
 export class ClientesService {
   constructor(private http: HttpClient) { }
-  
+
   getListaClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(
-      `${environment.baseClientesApiUrl}/Clientes`,
+      `${environment.baseClientesApiUrl}/v1/Clientes`,
       {
         responseType: 'json'
       })
@@ -34,7 +34,7 @@ export class ClientesService {
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
-} 
+}
 
 export interface Cliente {
   id: number;

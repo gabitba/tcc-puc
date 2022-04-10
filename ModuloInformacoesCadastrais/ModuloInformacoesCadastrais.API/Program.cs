@@ -12,13 +12,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 InjetorDeDependencias.ConfigurarDependencias(builder.Services, builder.Configuration);
 
-builder.Services.AddAuthorization();
+builder.Services.AddAndConfigureAuthorization(builder.Configuration);
 
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddOpenApiSupport(builder.Configuration);
+builder.Services.AddAndConfigureOpenApiSupport(builder.Configuration);
 
 builder.Services.AddCors(options =>
 {
