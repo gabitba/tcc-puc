@@ -7,9 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj", "ModuloInformacoesCadastrais.API/"]
-RUN dotnet restore "ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj"
 COPY . .
+RUN dotnet restore "ModuloInformacoesCadastrais.API/ModuloInformacoesCadastrais.API.csproj"
 WORKDIR "/src/ModuloInformacoesCadastrais.API"
 RUN dotnet build "ModuloInformacoesCadastrais.API.csproj" -c Release -o /app/build
 

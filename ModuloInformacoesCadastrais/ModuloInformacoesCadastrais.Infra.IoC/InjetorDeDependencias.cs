@@ -15,7 +15,10 @@ namespace ModuloInformacoesCadastrais.Infra.IoC
         {
             servicos.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), sqlOptions =>
+                {
+                    sqlOptions.EnableRetryOnFailure(5, TimeSpan.FromSeconds(30), null);
+                });
             });
 
             servicos.AddScoped<IClientesRepositorio, ClientesRepositorio>();

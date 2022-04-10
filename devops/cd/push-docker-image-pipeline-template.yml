@@ -10,7 +10,7 @@ steps:
   displayName: Realizando o build e o push da imagem do MIC para o Docker Hub
   inputs:
     command: buildAndPush
-    repository: gabrielatbadocker/gabrielatba-tccpuc
+    repository: gabrielatba/modulodeinformacoescadastrais
     tags: mic-latest
     Dockerfile: $(Build.SourcesDirectory)/ModuloInformacoesCadastrais/ModuloInformacoesCadastrais.API/Dockerfile
     buildContext: $(Build.SourcesDirectory)/ModuloInformacoesCadastrais
