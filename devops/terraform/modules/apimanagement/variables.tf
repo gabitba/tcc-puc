@@ -15,6 +15,11 @@ variable "subscriptionId" {
   description = "(required) The Azure Subscription Id where the resources are created."
 }
 
+variable "tenantId" {
+  type        = string
+  description = "(required) The Azure AD Tenant Id of the company."
+}
+
 variable "resourceGroupName" {
   type        = string
   description = "(required) The name of the resource group which will contain the resources."
@@ -38,6 +43,11 @@ variable "publisherEmail" {
 variable "micServiceName" {
   type        = string
   description = "(required) The name of the Mic App Service."
+}
+
+variable "micAppApplicationClientId" {
+  type        = string
+  description = "(required) The Application (Client) Id of the Mic App."
 }
 
 variable "micApiPath" {

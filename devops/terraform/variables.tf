@@ -22,6 +22,12 @@ variable "publisherEmail" {
   default     = "gabrielatba@hotmail.com"
 }
 
+variable "subscriptionId" {
+  type        = string
+  description = "(optional) The subscription id where all the resources will be created. Default: \"f63ea9a1-6b21-4536-a566-b7e50aee50cb\""
+  default     = "f63ea9a1-6b21-4536-a566-b7e50aee50cb"
+}
+
 variable "tenantId" {
   type        = string
   description = "(optional) The tenant of the application. Default: \"b56bdd3f-e9bc-4072-bab4-2191ce42dc0e\""

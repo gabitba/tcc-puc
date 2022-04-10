@@ -39,7 +39,7 @@ resource "azurerm_api_management_api" "mic" {
 
   import {
     content_format = "openapi-link"
-    content_value  = "https://${var.micServiceName}.azurewebsites.net/swagger/v1/swagger.json"
+    content_value  = "https://${var.micServiceName}.azurewebsites.net/swagger/v2/swagger.json"
   }
 }
 
@@ -77,6 +77,14 @@ resource "azurerm_api_management_api_policy" "mic" {
   <inbound>
     <base />
     <set-backend-service id="set-backend-service-policy" backend-id="${azurerm_api_management_backend.mic.name}" />
+        <validate-jwt header-name="Authorization" failed-validation-httpcode="401" failed-validation-error-message="Unauthorized. Access token is missing or invalid.">
+            <openid-config url="https://login.microsoftonline.com/${var.tenantId}/v2.0/.well-known/openid-configuration" />
+            <required-claims>
+                <claim name="aud">
+                    <value>${var.micAppApplicationClientId}</value>
+                </claim>
+            </required-claims>
+        </validate-jwt>
   </inbound>
 </policies>
 XML

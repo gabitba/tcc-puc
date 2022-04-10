@@ -71,14 +71,16 @@ module "micapplicationobjectclient" {
 }
 
 module "apiboaentrega" {
-  source                  = "./modules/apimanagement"
-  companyName             = var.companyName
-  companyDisplayName      = var.companyDisplayName
-  subscriptionId          = "f63ea9a1-6b21-4536-a566-b7e50aee50cb"
-  resourceGroupName       = data.azurerm_resource_group.tccpuc.name
-  location                = data.azurerm_resource_group.tccpuc.location
-  logAnalyticsWorkspaceId = azurerm_log_analytics_workspace.boaentrega.id
-  publisherEmail          = var.publisherEmail
-  micServiceName          = var.micAppName
-  micApiPath              = "api"
+  source                    = "./modules/apimanagement"
+  companyName               = var.companyName
+  companyDisplayName        = var.companyDisplayName
+  subscriptionId            = var.subscriptionId
+  tenantId                  = var.tenantId
+  resourceGroupName         = data.azurerm_resource_group.tccpuc.name
+  location                  = data.azurerm_resource_group.tccpuc.location
+  logAnalyticsWorkspaceId   = azurerm_log_analytics_workspace.boaentrega.id
+  publisherEmail            = var.publisherEmail
+  micServiceName            = var.micAppName
+  micApiPath                = "api"
+  micAppApplicationClientId = module.micapplicationobject.micAppApplicationClientId
 }
