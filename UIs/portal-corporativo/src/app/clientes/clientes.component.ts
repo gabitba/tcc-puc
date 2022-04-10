@@ -12,7 +12,6 @@ export class ClientesComponent implements OnInit {
   constructor(public sanitizer: DomSanitizer) {
     this.moduloClientesUrl = this.sanitizer.bypassSecurityTrustResourceUrl(environment.moduloClienteUrl)
    }
-
   ngOnInit(): void {
   }
 }
