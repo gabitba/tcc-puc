@@ -96,7 +96,7 @@ builder.Services.AddCors(options =>
         {
             policy.WithOrigins(
                 "http://localhost:4201",
-                "https://calm-dune-06b3f4b0f.1.azurestaticapps.net/")
+                "https://calm-dune-06b3f4b0f.1.azurestaticapps.net")
             .AllowAnyHeader()
             .AllowAnyMethod();
         });
