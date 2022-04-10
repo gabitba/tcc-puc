@@ -434,3 +434,8 @@ baseline.json
 .husky/_
 UIs/modulo-clientes-ui/.browserslistrc
 UIs/modulo-clientes-ui/.editorconfig
+
+# Terraform
+.terraform/
+.terraform.lock.hcl
+*.tfvars
