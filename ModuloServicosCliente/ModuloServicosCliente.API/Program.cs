@@ -1,10 +1,10 @@
 using Microsoft.OpenApi.Models;
-using ModuloInformacoesCadastrais.Infra.IoC;
+using ModuloServicosCliente.Infra.IoC;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-InjetorDeDependencias.ConfigurarDependencias(builder.Services, builder.Configuration);
+InjetorDeDependencias.ConfigurarCamundaService(builder.Services, builder.Configuration);
 
 builder.Services.AddControllers();
 

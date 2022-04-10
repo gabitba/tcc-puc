@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="1.3.0" camunda:diagramRelationId="84b07e8d-f169-490e-8982-cb0049dba661">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:zeebe="http://camunda.org/schema/zeebe/1.0" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Web Modeler" exporterVersion="405f0cc" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="1.3.0" camunda:diagramRelationId="84b07e8d-f169-490e-8982-cb0049dba661">
   <bpmn:process id="enviarReportCliente" name="EnviarReportCliente" isExecutable="true">
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1pytrkb</bpmn:outgoing>
@@ -9,61 +9,61 @@
     </bpmn:endEvent>
     <bpmn:serviceTask id="Activity_1o6ofaa" name="Obter Dados Cliente">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="obterDadosCliente" retries="2" />
+        <zeebe:taskDefinition type="obterDadosCliente" retries="2"/>
         <zeebe:ioMapping>
-          <zeebe:input source="= clienteId" target="clienteId" />
-          <zeebe:input source="= source" target="destinatario" />
-          <zeebe:output source="= source" target="clienteNome" />
-          <zeebe:output source="= source" target="clienteId" />
-          <zeebe:output source="= source" target="clienteEndereco" />
-          <zeebe:output source="= source" target="destinatario" />
+          <zeebe:input source="= clienteId" target="clienteId"/>
+          <zeebe:input source="= destinatario" target="destinatario"/>
+          <zeebe:output source="= clienteNome" target="clienteNome"/>
+          <zeebe:output source="= clienteId" target="clienteId"/>
+          <zeebe:output source="= clienteEndereco" target="clienteEndereco"/>
+          <zeebe:output source="= destinatario" target="destinatario"/>
         </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1pytrkb</bpmn:incoming>
       <bpmn:outgoing>Flow_1snsl71</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1pytrkb" sourceRef="StartEvent_1" targetRef="Activity_1o6ofaa" />
+    <bpmn:sequenceFlow id="Flow_1pytrkb" sourceRef="StartEvent_1" targetRef="Activity_1o6ofaa"/>
     <bpmn:serviceTask id="Activity_1836wqw" name="Enviar Email Report Cliente">
       <bpmn:extensionElements>
-        <zeebe:taskDefinition type="enviarEmailReportCliente" retries="2" />
+        <zeebe:taskDefinition type="enviarEmailReportCliente" retries="2"/>
         <zeebe:ioMapping>
-          <zeebe:input source="= source" target="clienteId" />
-          <zeebe:input source="= source" target="clienteNome" />
-          <zeebe:input source="= source" target="clienteEndereco" />
-          <zeebe:input source="= source" target="destinatario" />
+          <zeebe:input source="= clienteId" target="clienteId"/>
+          <zeebe:input source="= clienteNome" target="clienteNome"/>
+          <zeebe:input source="= clienteEndereco" target="clienteEndereco"/>
+          <zeebe:input source="= destinatario" target="destinatario"/>
         </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_1snsl71</bpmn:incoming>
       <bpmn:outgoing>Flow_1gv4zw8</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="Flow_1snsl71" sourceRef="Activity_1o6ofaa" targetRef="Activity_1836wqw" />
-    <bpmn:sequenceFlow id="Flow_1gv4zw8" sourceRef="Activity_1836wqw" targetRef="Event_0ivhryt" />
+    <bpmn:sequenceFlow id="Flow_1snsl71" sourceRef="Activity_1o6ofaa" targetRef="Activity_1836wqw"/>
+    <bpmn:sequenceFlow id="Flow_1gv4zw8" sourceRef="Activity_1836wqw" targetRef="Event_0ivhryt"/>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="enviarReportCliente">
       <bpmndi:BPMNEdge id="Flow_1gv4zw8_di" bpmnElement="Flow_1gv4zw8">
-        <di:waypoint x="540" y="118" />
-        <di:waypoint x="612" y="118" />
+        <di:waypoint x="540" y="118"/>
+        <di:waypoint x="612" y="118"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1snsl71_di" bpmnElement="Flow_1snsl71">
-        <di:waypoint x="360" y="118" />
-        <di:waypoint x="440" y="118" />
+        <di:waypoint x="360" y="118"/>
+        <di:waypoint x="440" y="118"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1pytrkb_di" bpmnElement="Flow_1pytrkb">
-        <di:waypoint x="186" y="118" />
-        <di:waypoint x="260" y="118" />
+        <di:waypoint x="186" y="118"/>
+        <di:waypoint x="260" y="118"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
-        <dc:Bounds x="150" y="100" width="36" height="36" />
+        <dc:Bounds x="150" y="100" width="36" height="36"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0ivhryt_di" bpmnElement="Event_0ivhryt">
-        <dc:Bounds x="612" y="100" width="36" height="36" />
+        <dc:Bounds x="612" y="100" width="36" height="36"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1quzxi9_di" bpmnElement="Activity_1o6ofaa">
-        <dc:Bounds x="260" y="78" width="100" height="80" />
+        <dc:Bounds x="260" y="78" width="100" height="80"/>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_1836wqw_di" bpmnElement="Activity_1836wqw">
-        <dc:Bounds x="440" y="78" width="100" height="80" />
+        <dc:Bounds x="440" y="78" width="100" height="80"/>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

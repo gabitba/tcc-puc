@@ -25,7 +25,11 @@ namespace ModuloEmail.API
             }
 
             HttpContent content = new StringContent(JsonSerializer.Serialize(email), Encoding.UTF8, "application/json");
-            await httpClient.PostAsync("", content);
+            var response = await httpClient.PostAsync("", content);
+            if(!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"Falha ao enviar e-mail: {response.Content}.");
+            }
         }
 
         public class EmailConteudo

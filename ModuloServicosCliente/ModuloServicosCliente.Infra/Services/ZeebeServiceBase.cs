@@ -5,35 +5,13 @@ using System.Text.Json;
 using Zeebe.Client;
 using Zeebe.Client.Api.Responses;
 using Zeebe.Client.Api.Worker;
-using Zeebe.Client.Impl.Builder;
 
-namespace ModuloServicosCliente.Infra.Interfaces
+namespace ModuloServicosCliente.Infra.Services
 {
-    public class ZeebeService : IZeebeService
+    public class ZeebeServiceBase : IZeebeService
     {
-        readonly IZeebeClient client;
-        readonly IOptions<CamundaCloudWorkerOptions> workerOptions;
-
-        public ZeebeService(IOptions<CamundaCloudClientOptions> clientOptions, IOptions<CamundaCloudWorkerOptions> workerOptions)
-        {
-            this.workerOptions = workerOptions;
-
-            // Usar esse client builder quando for usar o camunda cloud SaaS
-            //client = CamundaCloudClientBuilder
-            //.Builder()
-            //.UseClientId(clientOptions.Value.ClientId)
-            //.UseClientSecret(clientOptions.Value.ClientSecret)
-            //.UseContactPoint(clientOptions.Value.ContactPoint)
-            //.UseAuthServer(clientOptions.Value.AuthServer)
-            //.UseLoggerFactory(LoggerFactory) // optional
-            //.Build();
-
-            client = ZeebeClient
-                .Builder()
-                .UseGatewayAddress(clientOptions.Value.ContactPoint)
-                .UsePlainText()
-                .Build();
-        }
+        protected IZeebeClient client;
+        protected IOptions<CamundaCloudWorkerOptions> workerOptions;
 
         public async Task<IProcessInstanceResponse> StartInstanciaProcessoAsync(string bpmnProcessId, IDictionary<string, string> variablesJson)
         {
@@ -58,10 +36,9 @@ namespace ModuloServicosCliente.Infra.Interfaces
                 .Open();
         }
 
-        public async Task DeployInstanciaProcessoAsync(string idProcesso)
+        public async Task DeployInstanciaProcessoAsync(string fileBpmn)
         {
-            await client.NewDeployCommand().AddResourceFile($"BPMN/{idProcesso}.bpmn").Send();
+            await client.NewDeployCommand().AddResourceFile(fileBpmn).Send();
         }
-
     }
 }

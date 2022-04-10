@@ -1,6 +1,6 @@
 ﻿namespace ModuloServicosCliente.API.Models
 {
-    public static class ProcessosBPMN
+    public static class ProcessosBpmn
     {
         public const string EnviarReportCliente = "enviarReportCliente";
     }

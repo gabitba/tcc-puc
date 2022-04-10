@@ -5,16 +5,16 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["ModuloServicosClienteWorker/ModuloServicosClienteWorker.csproj", "ModuloServicosClienteWorker/"]
-RUN dotnet restore "ModuloServicosClienteWorker/ModuloServicosClienteWorker.csproj"
+COPY ["ModuloServicosCliente.Worker/ModuloServicosCliente.Worker.csproj", "ModuloServicosCliente.Worker/"]
+RUN dotnet restore "ModuloServicosCliente.Worker/ModuloServicosCliente.Worker.csproj"
 COPY . .
-WORKDIR "/src/ModuloServicosClienteWorker"
-RUN dotnet build "ModuloServicosClienteWorker.csproj" -c Release -o /app/build
+WORKDIR "/src/ModuloServicosCliente.Worker"
+RUN dotnet build "ModuloServicosCliente.Worker.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ModuloServicosClienteWorker.csproj" -c Release -o /app/publish
+RUN dotnet publish "ModuloServicosCliente.Worker.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ModuloServicosClienteWorker.dll"]
+ENTRYPOINT ["dotnet", "ModuloServicosCliente.Worker.dll"]

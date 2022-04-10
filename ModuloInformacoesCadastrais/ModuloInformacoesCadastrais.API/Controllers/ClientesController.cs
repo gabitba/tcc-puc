@@ -6,7 +6,7 @@ using ModuloInformacoesCadastrais.Application.Interfaces;
 namespace ModuloInformacoesCadastrais.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ClientesController : BaseController
     {
         private readonly ILogger<ClientesController> logger;

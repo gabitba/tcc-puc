@@ -5,7 +5,7 @@ using static ModuloEmail.API.EmailService;
 namespace ModuloEmail.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class EmailController : ControllerBase
     {
         private readonly ILogger<Controller> logger;
@@ -54,7 +54,7 @@ namespace ModuloEmail.API.Controllers
                     Body = emailBuilder.ToString(),
                 };
 
-                emailService.EnviarEmailAsync(conteudo).Wait();
+                await emailService.EnviarEmailAsync(conteudo);
                 return StatusCode(200);
             }
             catch (Exception ex)

@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "ModuloReport.API": {
+    "ModuloEmail.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
@@ -32,7 +32,9 @@
       "launchBrowser": true,
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
       "publishAllPorts": true,
-      "useSSL": true
+      "httpPort": 5022,
+      "useSSL": true,
+      "sslPort": 7022
     }
   }
 }

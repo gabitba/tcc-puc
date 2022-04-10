@@ -6,7 +6,7 @@ using System.Net.Http.Json;
 
 namespace ModuloServicosCliente.Infra.Services
 {
-    internal class ClienteService : IClienteService
+    public class ClienteService : IClienteService
     {
         private readonly HttpClient httpClient;
 
@@ -18,7 +18,7 @@ namespace ModuloServicosCliente.Infra.Services
 
         public async Task<ClienteDTO> ObterClienteAsync(int id)
         {
-            return await httpClient.GetFromJsonAsync<ClienteDTO>($"clientes/{id}");
+            return await httpClient.GetFromJsonAsync<ClienteDTO>($"api/Clientes/{id}");
         }
     }
 }

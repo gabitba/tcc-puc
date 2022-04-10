@@ -1,4 +1,4 @@
-using ModuloInformacoesCadastrais.Infra.IoC;
+using ModuloServicosCliente.Infra.IoC;
 using ModuloServicosCliente.Workers;
 
 IHostBuilder builder = Host.CreateDefaultBuilder(args)
@@ -9,8 +9,11 @@ IHostBuilder builder = Host.CreateDefaultBuilder(args)
 	})
 	.ConfigureServices((context, services) =>
 	{
-        InjetorDeDependencias.ConfigurarDependencias(services, context.Configuration);
+        InjetorDeDependencias.ConfigurarCamundaService(services, context.Configuration);
+		InjetorDeDependencias.ConfigurarAPIs(services, context.Configuration);
+
 		services.AddHostedService<ObterDadosClienteWorker>();
+		services.AddHostedService<EnviarEmailReportClienteWorker>();
 	});
 
 IHost host = builder.Build();
