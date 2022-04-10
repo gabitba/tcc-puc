@@ -1,4 +1,4 @@
-resource "azurerm_application_insights" "apiboaentrega" {
+resource "azurerm_application_insights" "boaentrega" {
   name                = "apiboaentregaappinsights"
   location            = var.location
   resource_group_name = var.resourceGroupName
@@ -80,4 +80,66 @@ resource "azurerm_api_management_api_policy" "mic" {
   </inbound>
 </policies>
 XML
+}
+
+resource "azurerm_api_management_logger" "boaentrega" {
+  name                = "${var.companyName}-logger"
+  api_management_name = azurerm_api_management.boaentrega.name
+  resource_group_name = var.resourceGroupName
+
+  application_insights {
+    instrumentation_key = azurerm_application_insights.boaentrega.instrumentation_key
+  }
+}
+
+resource "azurerm_api_management_api_diagnostic" "mic" {
+  identifier               = "applicationinsights"
+  resource_group_name      = var.resourceGroupName
+  api_management_name      = azurerm_api_management.boaentrega.name
+  api_name                 = azurerm_api_management_api.mic.name
+  api_management_logger_id = azurerm_api_management_logger.boaentrega.id
+
+  sampling_percentage       = 100.0
+  always_log_errors         = true
+  log_client_ip             = true
+  verbosity                 = "verbose"
+  http_correlation_protocol = "W3C"
+
+  frontend_request {
+    body_bytes = 8192
+    headers_to_log = [
+      "content-type",
+      "accept",
+      "origin",
+      "authorization"
+    ]
+  }
+
+  frontend_response {
+    body_bytes = 8192
+    headers_to_log = [
+      "content-type",
+      "content-length",
+      "origin"
+    ]
+  }
+
+  backend_request {
+    body_bytes = 8192
+    headers_to_log = [
+      "content-type",
+      "accept",
+      "origin",
+      "authorization"
+    ]
+  }
+
+  backend_response {
+    body_bytes = 8192
+    headers_to_log = [
+      "content-type",
+      "content-length",
+      "origin"
+    ]
+  }
 }
