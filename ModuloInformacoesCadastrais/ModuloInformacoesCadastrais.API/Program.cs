@@ -17,9 +17,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddMicrosoftIdentityWebApi(builder.Configuration, jwtBearerScheme: JwtBearerDefaults.AuthenticationScheme);
 builder.Services.AddAuthorization(options =>
 {
-    options.AddPolicy(AuthorizationResources.Client.READ_POLICY_NAME, p =>
+    options.AddPolicy(AuthorizationResources.Client.WRITE_POLICY_NAME, p =>
     {
-        p.AddRequirements(new ScopeOrRoleRequirement(new string[] { AuthorizationResources.Client.Scope.Read }, new string[] { AuthorizationResources.Client.Role.Read }));
+        p.AddRequirements(new ScopeOrRoleRequirement(new string[] { AuthorizationResources.Client.Scope.Write }, new string[] { AuthorizationResources.Client.Role.Write }));
     });
     options.AddPolicy(AuthorizationResources.Client.READ_OR_WRITE_POLICY_NAME, p =>
     {

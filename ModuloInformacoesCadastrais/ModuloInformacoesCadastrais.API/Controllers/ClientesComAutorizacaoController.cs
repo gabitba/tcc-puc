@@ -29,7 +29,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <response code="200">Lista de clientes cadastrados.</response>
         /// <response code="500">Erro.</response>
         [HttpGet("")]
-        [Authorize(policy: AuthorizationResources.Client.READ_POLICY_NAME)]
+        [Authorize(policy: AuthorizationResources.Client.READ_OR_WRITE_POLICY_NAME)]
         [ProducesResponseType(200)]
         [ProducesResponseType(500)]
         [Produces("application/json")]
@@ -57,7 +57,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <response code="200">Retorna o cliente cadastrado.</response>
         /// <response code="404">Cliente n�o encontrado.</response>
         [HttpGet("{idCliente}")]
-        [Authorize(policy: AuthorizationResources.Client.READ_POLICY_NAME)]
+        [Authorize(policy: AuthorizationResources.Client.READ_OR_WRITE_POLICY_NAME)]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
         [Produces("application/json")]
@@ -89,7 +89,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <response code="200">Retorna o id do cliente cadastrado.</response>
         /// <response code="400">Falta dados para cadastro de cliente.</response>
         [HttpPost]
-        [Authorize(policy: AuthorizationResources.Client.READ_OR_WRITE_POLICY_NAME)]
+        [Authorize(policy: AuthorizationResources.Client.WRITE_POLICY_NAME)]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [Produces("application/json")]
@@ -130,7 +130,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers
         /// <response code="400">Falta id de cliente.</response>
         /// <response code="404">Cliente inexistente.</response>
         [HttpDelete("{idCliente}")]
-        [Authorize(policy: AuthorizationResources.Client.READ_OR_WRITE_POLICY_NAME)]
+        [Authorize(policy: AuthorizationResources.Client.WRITE_POLICY_NAME)]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
