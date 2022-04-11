@@ -15,8 +15,7 @@ export class ClientesService {
       `${environment.baseClientesApiUrl}/v1/Clientes`,
       {
         responseType: 'json'
-      })
-      .pipe(
+      }).pipe(
         catchError(this.handleError)
       )
   }
