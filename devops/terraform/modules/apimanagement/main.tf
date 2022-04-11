@@ -39,7 +39,7 @@ resource "azurerm_api_management_api" "mic" {
 
   import {
     content_format = "openapi-link"
-    content_value  = "https://${var.micServiceName}.azurewebsites.net/swagger/v2/swagger.json"
+    content_value  = "https://${var.micServiceName}.azurewebsites.net/swagger/v2/docs.json"
   }
 }
 
