@@ -23,7 +23,7 @@ namespace ModuloInformacoesCadastrais.API.OpenApi
         {
             OpenApiInfo info = new OpenApiInfo()
             {
-                Title = "API Modulo de Informações Cadastrais",
+                Title = "API Módulo de Informações Cadastrais",
                 Version = description.ApiVersion.ToString(),
                 Description = "Uma aplicação .NET 6 Web API para acesso aos dados cadastrais.",
                 Contact = new OpenApiContact { Name = "Gabriela Tolentino", Email = "gabrielatba@gmail.com" }

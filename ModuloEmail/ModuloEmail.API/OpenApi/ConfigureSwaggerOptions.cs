@@ -23,7 +23,7 @@ namespace ModuloEmail.API.OpenApi
         {
             OpenApiInfo info = new OpenApiInfo()
             {
-                Title = "API Modulo de E-mail",
+                Title = "API Módulo de E-mail",
                 Version = description.ApiVersion.ToString(),
                 Description = "Uma aplicação .NET 6 Web API para envio de e-mails por meio de um Azure Logic Apps. O Azure Logic Apps está configurado para que ao receber uma requisição HTTP, ele envie um e-mail com as informações passadas no corpo da requisição.",
                 Contact = new OpenApiContact { Name = "Gabriela Tolentino", Email = "gabrielatba@gmail.com" }
