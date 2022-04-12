@@ -1,11 +1,5 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using ModuloInformacoesCadastrais.API.Authorization;
 using ModuloInformacoesCadastrais.Infra.IoC;
-using Microsoft.Identity.Web;
-using Microsoft.OpenApi.Models;
-using System.Reflection;
-using Microsoft.AspNetCore.Authorization;
 using ModuloInformacoesCadastrais.API.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
