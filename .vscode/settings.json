@@ -1,6 +1,0 @@
-{
-    "files.associations": {
-        "*-pipeline.yml": "azure-pipelines",
-        "*-pipeline-template.yml": "azure-pipelines"
-    }
-}
