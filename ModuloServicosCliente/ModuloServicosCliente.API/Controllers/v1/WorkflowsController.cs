@@ -7,12 +7,12 @@ namespace ModuloServicosCliente.API.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
-    public class WorkflowController : BaseController
+    public class WorkflowsController : BaseController
     {
-        private readonly ILogger<WorkflowController> logger;
+        private readonly ILogger<WorkflowsController> logger;
         private readonly IZeebeService camundaService;
 
-        public WorkflowController(ILogger<WorkflowController> logger, IZeebeService camundaService) : base(logger)
+        public WorkflowsController(ILogger<WorkflowsController> logger, IZeebeService camundaService) : base(logger)
         {
             this.logger = logger;
             this.camundaService = camundaService;
