@@ -23,7 +23,7 @@ namespace ModuloServicosCliente.API.OpenApi
         {
             OpenApiInfo info = new OpenApiInfo()
             {
-                Title = "API Modulo de Serviços ao Cliente",
+                Title = "API Módulo de Serviços ao Cliente",
                 Version = description.ApiVersion.ToString(),
                 Description = "Uma aplicação .NET 6 Web API para automatização de processos de serviço ao Cliente baseados em BPMN no Camunda.",
                 Contact = new OpenApiContact { Name = "Gabriela Tolentino", Email = "gabrielatba@gmail.com" }
