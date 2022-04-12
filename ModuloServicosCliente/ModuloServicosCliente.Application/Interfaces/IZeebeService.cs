@@ -9,6 +9,6 @@ namespace ModuloServicosCliente.Application.Interfaces
 
         Task<IProcessInstanceResponse> StartInstanciaProcessoAsync(string idProcesso, IDictionary<string, string> variaveis);
 
-        Task DeployInstanciaProcessoAsync(string fileBpmn);
+        Task AtualizarWorkflowProcesso(string fileBpmn);
     }
 }

@@ -1,6 +1,5 @@
-using Microsoft.OpenApi.Models;
+using ModuloServicosCliente.API.OpenApi;
 using ModuloServicosCliente.Infra.IoC;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,21 +9,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Version = "v1",
-        Title = "API Modulo de Serviços ao Cliente",
-        Description = "Uma aplicação .NET 6 Web API para controle de processos BPMN no Camunda.",
-        Contact = new OpenApiContact
-        {
-            Name = "Gabriela Tolentino",
-        }
-    });
-    var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
-});
+builder.Services.AddAndConfigureOpenApiSupport(builder.Configuration);
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
