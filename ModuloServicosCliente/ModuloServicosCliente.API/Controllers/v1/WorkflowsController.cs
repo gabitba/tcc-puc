@@ -20,7 +20,7 @@ namespace ModuloServicosCliente.API.Controllers
 
 
         /// <summary>
-        /// Realiza o deploy do workflow do processo de envio de report de cliente por e-mail. O arquivo do .bpmn deployado se encontra no caminho "./BPMN/enviarReportCliente.bpmn".
+        /// Realiza o deploy do workflow do processo de envio de report de cliente por e-mail. O arquivo do .bpmn deployado se encontra no caminho "./Workflows/enviarReportCliente.bpmn".
         /// </summary>
         /// <response code="200">Workflow BPMN deployado.</response>
         /// <response code="500">Houve erro no deploy do workflow.</response>
@@ -34,7 +34,7 @@ namespace ModuloServicosCliente.API.Controllers
 
             try
             {
-                await camundaService.DeployWorkflow($"Bpmn/{ProcessosBpmn.EnviarReportCliente}.bpmn");
+                await camundaService.DeployWorkflow($"Workflows/{ProcessosBpmn.EnviarReportCliente}.bpmn");
                 return Ok();
             }
             catch (Exception ex)

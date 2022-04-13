@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using ModuloServicosCliente.Application.Interfaces;
 using ModuloServicosCliente.Infra.Options;
 using Zeebe.Client.Impl.Builder;
 
