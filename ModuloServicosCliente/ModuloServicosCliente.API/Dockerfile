@@ -19,4 +19,6 @@ RUN dotnet publish "ModuloServicosCliente.API.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+RUN mkdir /app/Workflows
+COPY --from=build /src/ModuloServicosCliente.API/Workflows /app/Workflows
 ENTRYPOINT ["dotnet", "ModuloServicosCliente.API.dll"]
