@@ -26,7 +26,7 @@ namespace ModuloServicosCliente.Infra.Services
             };
 
             HttpContent content = new StringContent(JsonSerializer.Serialize(request), Encoding.UTF8, "application/json");
-            var response = await httpClient.PostAsync("v1/Email/ReportCliente", content);
+            var response = await httpClient.PostAsync("api/v1/Email/ReportCliente", content);
             if (!response.IsSuccessStatusCode)
             {
                 throw new Exception($"Falha ao enviar e-mail: {response.Content}.");
