@@ -36,7 +36,7 @@ namespace ModuloServicosCliente.Infra.Services
                 .Open();
         }
 
-        public async Task AtualizarWorkflowProcesso(string fileBpmn)
+        public async Task DeployWorkflow(string fileBpmn)
         {
             await client.NewDeployCommand().AddResourceFile(fileBpmn).Send();
         }
