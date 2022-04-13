@@ -34,7 +34,7 @@ namespace ModuloServicosCliente.API.Controllers
 
             try
             {
-                await camundaService.DeployWorkflow($"Workflows/{ProcessosBpmn.EnviarReportCliente}.bpmn");
+                await camundaService.DeployWorkflow($"./Workflows/{ProcessosBpmn.EnviarReportCliente}.bpmn");
                 return Ok();
             }
             catch (Exception ex)
