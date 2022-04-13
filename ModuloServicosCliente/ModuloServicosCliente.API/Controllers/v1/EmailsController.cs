@@ -53,7 +53,7 @@ namespace ModuloServicosCliente.API.Controllers
                 variaveis.Add("clienteId", request.ClienteId.ToString());
                 variaveis.Add("destinatario", request.Destinatario);
 
-                var instancia = await camundaService.StartInstanciaProcessoAsync(ProcessosBpmn.EnviarReportCliente, variaveis);
+                var instancia = await camundaService.StartInstanciaProcessoAsync(WorkflowsModel.EnviarReportCliente, variaveis);
 
                 return Ok(new StartInstanciaProcessoResponseModel
                 {
