@@ -10,20 +10,22 @@ namespace ModuloInformacoesCadastrais.API.Authorization
         public static IServiceCollection AddAndConfigureAuthorization(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                                .AddMicrosoftIdentityWebApi(configuration, jwtBearerScheme: JwtBearerDefaults.AuthenticationScheme);
+                .AddMicrosoftIdentityWebApi(configuration, jwtBearerScheme: JwtBearerDefaults.AuthenticationScheme);
+            
             services.AddAuthorization(options =>
             {
-                options.AddPolicy(AuthorizationResources.Client.WRITE_POLICY_NAME, p =>
+                options.AddPolicy(AuthorizationResources.Clientes.WRITE_POLICY_NAME, p =>
                 {
-                    p.AddRequirements(new ScopeOrRoleRequirement(new string[] { AuthorizationResources.Client.Scope.Write }, new string[] { AuthorizationResources.Client.Role.Write }));
+                    p.AddRequirements(new RoleRequirement( new string[] { AuthorizationResources.Clientes.Role.Write }));
                 });
-                options.AddPolicy(AuthorizationResources.Client.READ_OR_WRITE_POLICY_NAME, p =>
+
+                options.AddPolicy(AuthorizationResources.Clientes.READ_OR_WRITE_POLICY_NAME, p =>
                 {
-                    p.AddRequirements(new ScopeOrRoleRequirement(new string[] { AuthorizationResources.Client.Scope.Read, AuthorizationResources.Client.Scope.Write }, new string[] { AuthorizationResources.Client.Role.Read, AuthorizationResources.Client.Role.Write }));
+                    p.AddRequirements(new RoleRequirement(new string[] { AuthorizationResources.Clientes.Role.Read, AuthorizationResources.Clientes.Role.Write }));
                 });
             });
 
-            services.AddSingleton<IAuthorizationHandler, ScopeOrRoleAuthorizationHandler>();
+            services.AddSingleton<IAuthorizationHandler, RoleAuthorizationHandler>();
 
             services.AddOptions<OpenIdConnectOptions>(OpenIdConnectDefaults.AuthenticationScheme).Configure(options =>
             {

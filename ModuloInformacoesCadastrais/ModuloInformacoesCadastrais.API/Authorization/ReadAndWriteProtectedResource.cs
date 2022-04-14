@@ -9,8 +9,9 @@ namespace ModuloInformacoesCadastrais.API.Authorization
 
         public ReadAndWriteProtectedResource(string resourceName, string? resourceSuffix = null)
         {
-            this.ResourceName = resourceName;
-            this.ResourceSuffix = resourceSuffix == null ? string.Empty : (resourceSuffix.StartsWith(".") ? resourceSuffix : $".{resourceSuffix}");
+            ResourceName = resourceName;
+            ResourceSuffix = resourceSuffix == null ? string.Empty : 
+                (resourceSuffix.StartsWith(".") ? resourceSuffix : $".{resourceSuffix}");
         }
     }
 }

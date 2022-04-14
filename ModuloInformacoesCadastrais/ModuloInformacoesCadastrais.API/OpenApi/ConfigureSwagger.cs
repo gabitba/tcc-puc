@@ -34,7 +34,7 @@ namespace ModuloInformacoesCadastrais.API.OpenApi
                 options.OperationFilter<AppendAuthorizeToSummaryOperationFilter>();
 
                 string authBaseUrl = $"{configuration["AzureAD:Instance"]}/{configuration["AzureAD:TenantId"]}/oauth2/v2.0";
-                string audience = "api://boaentrega-micapi";
+
                 options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
                 {
                     Description = "OAuth2.0 Auth Code with PKCE",
@@ -48,8 +48,7 @@ namespace ModuloInformacoesCadastrais.API.OpenApi
                             TokenUrl = new Uri($"{authBaseUrl}/token"),
                             Scopes = new Dictionary<string, string>
                             {
-                                { $"{audience}/{AuthorizationResources.Client.Scope.Read}", "Read clients" },
-                                { $"{audience}/{AuthorizationResources.Client.Scope.Write}", "Write clients" },
+                                { $"{configuration["AzureAD:ClientId"]}/.default", "Padrão" },
                             }
                         }
                     }

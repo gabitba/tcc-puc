@@ -3,21 +3,19 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ModuloInformacoesCadastrais.API.Authorization
 {
-    public class ScopeOrRoleAuthorizationHandler : AuthorizationHandler<ScopeOrRoleRequirement>
+    public class RoleAuthorizationHandler : AuthorizationHandler<RoleRequirement>
     {
         private IEnumerable<string> ROLE_CLAIM_NAMES = new string[] { ClaimTypes.Role, "roles" };
-        private IEnumerable<string> SCOPE_CLAIM_NAMES = new string[] { "scp", "http://schemas.microsoft.com/identity/claims/scope" };
 
-        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, ScopeOrRoleRequirement requirement)
+        protected override Task HandleRequirementAsync(AuthorizationHandlerContext context, RoleRequirement requirement)
         {
-            if (!requirement.Roles.Any() && !requirement.Scopes.Any())
+            if (!requirement.Roles.Any())
             {
                 context.Succeed(requirement);
                 return Task.CompletedTask;
             }
 
-            if (UserHasClaimValue(requirement.Roles, GetClaims(context.User, ROLE_CLAIM_NAMES))
-                || UserHasClaimValue(requirement.Scopes, GetClaims(context.User, SCOPE_CLAIM_NAMES)))
+            if (UserHasClaimValue(requirement.Roles, GetClaims(context.User, ROLE_CLAIM_NAMES)))
             {
                 context.Succeed(requirement);
                 return Task.CompletedTask;
