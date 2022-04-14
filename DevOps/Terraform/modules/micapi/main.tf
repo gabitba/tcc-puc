@@ -77,10 +77,16 @@ resource "azuread_service_principal_delegated_permission_grant" "mic_app" {
   claim_values                         = ["openid", "User.Read.All"]
 }
 
+
+data "azuread_domains" "ad_domains" {
+  only_initial = true
+}
+
+
 resource "azuread_user" "reader" {
   display_name        = "Gabs Reader"
   password            = "Senh@!2022"
-  user_principal_name = "gabs.reader@${data.azuread_domains.example.domains.0.domain_name}"
+  user_principal_name = "gabs.reader@${data.azuread_domains.ad_domains.domains.0.domain_name}"
 }
 
 resource "azuread_app_role_assignment" "reader" {
@@ -92,7 +98,7 @@ resource "azuread_app_role_assignment" "reader" {
 resource "azuread_user" "writer" {
   display_name        = "Gabs Writer"
   password            = "Senh@!2022"
-  user_principal_name = "gabs.writer@${data.azuread_domains.example.domains.0.domain_name}"
+  user_principal_name = "gabs.writer@${data.azuread_domains.ad_domains.domains.0.domain_name}"
 }
 
 resource "azuread_app_role_assignment" "writer" {

@@ -34,6 +34,12 @@ variable "publisherEmail" {
   description = "(obrigatório) O e-mail do publisher da API Management admin."
 }
 
+variable "publisherName" {
+  type        = string
+  description = "(opcional) O nome do publisher."
+  default     = "Empresa \"Boa Entrega\""
+}
+
 variable "micAppName" {
   type        = string
   description = "(obrigatório) The name of the Mic App Service."
