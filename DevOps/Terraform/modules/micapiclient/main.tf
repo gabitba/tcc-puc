@@ -13,7 +13,7 @@ resource "azuread_service_principal" "mic_app" {
 }
 
 resource "azuread_application" "mic_app_read_client" {
-  display_name     = "${var.companyDisplayName} MIC App Read Client"
+  display_name     = "MIC App Client Reader"
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 
@@ -35,12 +35,7 @@ resource "azuread_application" "mic_app_read_client" {
     resource_app_id = azuread_service_principal.mic_app.application_id
 
     resource_access {
-      id   = azuread_service_principal.mic_app.oauth2_permission_scope_ids["Client.Read"]
-      type = "Scope"
-    }
-
-    resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["Client.Read.All"]
+      id   = azuread_service_principal.mic_app.app_role_ids["Clientes.Reader"]
       type = "Role"
     }
   }
@@ -60,11 +55,11 @@ resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_cl
 resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client_micapp" {
   service_principal_object_id          = azuread_service_principal.mic_app_read_client.object_id
   resource_service_principal_object_id = azuread_service_principal.mic_app.object_id
-  claim_values                         = ["Client.Read", "Client.Read.All"]
+  claim_values                         = ["Clientes.Reader"]
 }
 
 resource "azuread_application" "mic_app_write_client" {
-  display_name     = "${var.companyDisplayName} MIC App Write Client"
+  display_name     = "MIC App Client Writer"
   owners           = [data.azuread_client_config.current.object_id]
   sign_in_audience = "AzureADMyOrg"
 
@@ -86,12 +81,7 @@ resource "azuread_application" "mic_app_write_client" {
     resource_app_id = azuread_service_principal.mic_app.application_id
 
     resource_access {
-      id   = azuread_service_principal.mic_app.oauth2_permission_scope_ids["Client.Write"]
-      type = "Scope"
-    }
-
-    resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["Client.Write.All"]
+      id   = azuread_service_principal.mic_app.app_role_ids["Clientes.Writer"]
       type = "Role"
     }
   }
@@ -111,6 +101,5 @@ resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_c
 resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client_micapp" {
   service_principal_object_id          = azuread_service_principal.mic_app_write_client.object_id
   resource_service_principal_object_id = azuread_service_principal.mic_app.object_id
-  claim_values                         = ["Client.Write", "Client.Write.All"]
+  claim_values                         = ["Clientes.Writer"]
 }
-

@@ -55,32 +55,30 @@ resource "azurerm_log_analytics_workspace" "boaentrega" {
   }
 }
 
-module "micapplicationobject" {
-  source             = "./modules/micapplicationobject"
+module "micapi" {
+  source             = "./modules/micapi"
   companyName        = var.companyName
-  companyDisplayName = var.companyDisplayName
-  micServiceName     = var.micAppName
+  micAppName         = var.micAppName
 }
 
-module "micapplicationobjectclient" {
-  source             = "./modules/micapplicationobjectclient"
+module "micapiclient" {
+  source             = "./modules/micapiclient"
   companyName        = var.companyName
-  companyDisplayName = var.companyDisplayName
-  micServiceName     = var.micAppName
-  micAppClientId     = module.micapplicationobject.micAppApplicationClientId
+  micAppName         = var.micAppName
+  micAppClientId     = module.micapi.micAppApplicationClientId
 }
 
 module "apiboaentrega" {
   source                    = "./modules/apimanagement"
   companyName               = var.companyName
-  companyDisplayName        = var.companyDisplayName
   subscriptionId            = var.subscriptionId
   tenantId                  = var.tenantId
   resourceGroupName         = data.azurerm_resource_group.tccpuc.name
   location                  = data.azurerm_resource_group.tccpuc.location
   logAnalyticsWorkspaceId   = azurerm_log_analytics_workspace.boaentrega.id
   publisherEmail            = var.publisherEmail
-  micServiceName            = var.micAppName
+  publisherName             = var.publisherName
+  micAppName                = var.micAppName
   micApiPath                = "api"
-  micAppApplicationClientId = module.micapplicationobject.micAppApplicationClientId
+  micAppApplicationClientId = module.micapi.micAppApplicationClientId
 }

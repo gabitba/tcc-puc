@@ -13,7 +13,7 @@ resource "azurerm_api_management" "boaentrega" {
   name                = "api${var.companyName}"
   location            = var.location
   resource_group_name = var.resourceGroupName
-  publisher_name      = var.companyDisplayName
+  publisher_name      = var.publisherName
   publisher_email     = var.publisherEmail
 
   sku_name = "Consumption_0"
@@ -39,19 +39,19 @@ resource "azurerm_api_management_api" "mic" {
 
   import {
     content_format = "openapi-link"
-    content_value  = "https://${var.micServiceName}.azurewebsites.net/swagger/v2/docs.json"
+    content_value  = "https://${var.micAppName}.azurewebsites.net/swagger/v2/docs.json"
   }
 }
 
 resource "azurerm_api_management_backend" "mic" {
-  name                = "WebApp_${var.micServiceName}"
+  name                = "WebApp_${var.micAppName}"
   resource_group_name = var.resourceGroupName
   api_management_name = azurerm_api_management.boaentrega.name
-  description         = var.micServiceName
+  description         = var.micAppName
   title               = "MIC Backend"
-  resource_id         = "https://management.azure.com/subscriptions/${var.subscriptionId}/resourceGroups/${var.resourceGroupName}/providers/Microsoft.Web/sites/${var.micServiceName}"
+  resource_id         = "https://management.azure.com/subscriptions/${var.subscriptionId}/resourceGroups/${var.resourceGroupName}/providers/Microsoft.Web/sites/${var.micAppName}"
   protocol            = "http"
-  url                 = "http://${var.micServiceName}.azurewebsites.net/"
+  url                 = "http://${var.micAppName}.azurewebsites.net/"
 }
 
 resource "azurerm_api_management_policy" "mic" {

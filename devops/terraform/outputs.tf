@@ -1,11 +1,11 @@
 output "micApiId" {
-  value = module.micapplicationobject.micAppApplicationClientId
+  value = module.micapi.micAppApplicationClientId
 }
 
 output "micReadClientId" {
-  value = module.micapplicationobjectclient.micAppReadClientApplicationClientId
+  value = module.micapiclient.micAppReadClientApplicationClientId
 }
 
 output "micWriteClientId" {
-  value = module.micapplicationobjectclient.micAppWriteClientServicePrincipalClientId
+  value = module.micapiclient.micAppWriteClientServicePrincipalClientId
 }

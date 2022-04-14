@@ -1,35 +1,41 @@
 variable "companyName" {
   type        = string
-  description = "(optional) The name of the company. Default: \"boaentrega\""
+  description = "(opcional) Nome da empresa. Padrão: \"boaentrega\""
   default     = "boaentrega"
 }
 
 variable "micAppName" {
   type        = string
-  description = "(optional) The name of the MIC app service"
+  description = "(opcional) Nome da API do Módulo de Informações Cadastrais"
   default     = "moduloinformacoescadastraisapi"
-}
-
-variable "companyDisplayName" {
-  type        = string
-  description = "(optional) The display name of the company. Default: \"Boa Entrega\""
-  default     = "Boa Entrega"
 }
 
 variable "publisherEmail" {
   type        = string
-  description = "(optional) The e-mail of the API Management publisher admin."
+  description = "(opcional) O e-mail do publisher da API Management admin."
   default     = "gabrielatba@hotmail.com"
+}
+
+variable "publisherName" {
+  type        = string
+  description = "(opcional) O nome do publisher."
+  default     = "Empresa \"Boa Entrega\""
 }
 
 variable "subscriptionId" {
   type        = string
-  description = "(optional) The subscription id where all the resources will be created. Default: \"f63ea9a1-6b21-4536-a566-b7e50aee50cb\""
+  description = "(opcional) O subscription id onde todos os recursos serão criados. Padrão: \"f63ea9a1-6b21-4536-a566-b7e50aee50cb\""
   default     = "f63ea9a1-6b21-4536-a566-b7e50aee50cb"
 }
 
 variable "tenantId" {
   type        = string
-  description = "(optional) The tenant of the application. Default: \"b56bdd3f-e9bc-4072-bab4-2191ce42dc0e\""
+  description = "(opcional) O tenant id da aplicação. Padrão: \"b56bdd3f-e9bc-4072-bab4-2191ce42dc0e\""
   default     = "b56bdd3f-e9bc-4072-bab4-2191ce42dc0e"
+}
+
+variable "userReaderEmail" {
+  type        = string
+  description = "(opcional) O e-mail de um usuário com perfil reader da API do Módulo de Informações Cadastrais."
+  default     = "gabstba@gmail.com"
 }

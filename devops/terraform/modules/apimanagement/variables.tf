@@ -1,56 +1,50 @@
 variable "companyName" {
   type        = string
-  description = "(optional) The name of the company. Default: \"boaentrega\""
+  description = "(opcional) Nome da empresa. Padrão: \"boaentrega\""
   default     = "boaentrega"
-}
-
-variable "companyDisplayName" {
-  type        = string
-  description = "(optional) The display name of the company. Default: \"Boa Entrega\""
-  default     = "Boa Entrega"
 }
 
 variable "subscriptionId" {
   type        = string
-  description = "(required) The Azure Subscription Id where the resources are created."
+  description = "(obrigatório) O Azure Subscription Id onde os recursos são criados."
 }
 
 variable "tenantId" {
   type        = string
-  description = "(required) The Azure AD Tenant Id of the company."
+  description = "(obrigatório) O Azure AD Tenant Id da empresa."
 }
 
 variable "resourceGroupName" {
   type        = string
-  description = "(required) The name of the resource group which will contain the resources."
+  description = "(obrigatório) O nome do grupo de recurso que conterá os recursos."
 }
 
 variable "location" {
   type        = string
-  description = "(required) Location where the resources will be created."
+  description = "(obrigatório) Location onde os recursos serão criados."
 }
 
 variable "logAnalyticsWorkspaceId" {
   type        = string
-  description = "(required) Id of the Log Analytics Workspace resource which will be used by this resource."
+  description = "(obrigatório) Id do recurso de Log Analytics Workspace o qual vai ser usado por este recurso."
 }
 
 variable "publisherEmail" {
   type        = string
-  description = "(required) The e-mail of the API Management publisher admin."
+  description = "(obrigatório) O e-mail do publisher da API Management admin."
 }
 
-variable "micServiceName" {
+variable "micAppName" {
   type        = string
-  description = "(required) The name of the Mic App Service."
+  description = "(obrigatório) The name of the Mic App Service."
 }
 
 variable "micAppApplicationClientId" {
   type        = string
-  description = "(required) The Application (Client) Id of the Mic App."
+  description = "(obrigatório) Nome da API do Módulo de Informações Cadastrais"
 }
 
 variable "micApiPath" {
   type        = string
-  description = "(required) The path of the api exposed by the Mic App Service."
+  description = "(obrigatório) O caminho o qual a API é exposta no serviço do Módulo de Informações Cadastrais."
 }
