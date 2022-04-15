@@ -35,7 +35,7 @@ resource "azuread_application" "mic_app_read_client" {
     resource_app_id = azuread_service_principal.mic_app.application_id
 
     resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["Clientes.Reader"]
+      id   = azuread_service_principal.mic_app.app_role_ids["clientes.reader"]
       type = "Role"
     }
   }
@@ -55,7 +55,7 @@ resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_cl
 resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client_micapp" {
   service_principal_object_id          = azuread_service_principal.mic_app_read_client.object_id
   resource_service_principal_object_id = azuread_service_principal.mic_app.object_id
-  claim_values                         = ["Clientes.Reader"]
+  claim_values                         = ["clientes.reader"]
 }
 
 resource "azuread_application" "mic_app_write_client" {
@@ -81,7 +81,7 @@ resource "azuread_application" "mic_app_write_client" {
     resource_app_id = azuread_service_principal.mic_app.application_id
 
     resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["Clientes.Writer"]
+      id   = azuread_service_principal.mic_app.app_role_ids["clientes.writer"]
       type = "Role"
     }
   }
@@ -101,5 +101,5 @@ resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_c
 resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client_micapp" {
   service_principal_object_id          = azuread_service_principal.mic_app_write_client.object_id
   resource_service_principal_object_id = azuread_service_principal.mic_app.object_id
-  claim_values                         = ["Clientes.Writer"]
+  claim_values                         = ["clientes.writer"]
 }

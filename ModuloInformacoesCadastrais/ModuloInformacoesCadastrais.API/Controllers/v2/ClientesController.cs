@@ -56,7 +56,7 @@ namespace ModuloInformacoesCadastrais.API.Controllers.V2
         /// </summary>
         /// <returns>Cliente.</returns>
         /// <response code="200">Retorna o cliente cadastrado.</response>
-        /// <response code="404">Cliente n�o encontrado.</response>
+        /// <response code="404">Cliente não encontrado.</response>
         [HttpGet("{idCliente}")]
         [Authorize(policy: AuthorizationResources.Clientes.READ_OR_WRITE_POLICY_NAME)]
         [ProducesResponseType(200)]

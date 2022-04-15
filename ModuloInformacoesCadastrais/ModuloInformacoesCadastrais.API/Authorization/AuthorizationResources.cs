@@ -4,7 +4,7 @@ namespace ModuloInformacoesCadastrais.API.Authorization
     {
         public static class Clientes
         {
-            private const string RESOURCE_NAME = "Clientes";
+            private const string RESOURCE_NAME = "clientes";
             public const string READ_OR_WRITE_POLICY_NAME = "ClientesReadOrWritePolicy";
             public const string WRITE_POLICY_NAME = "ClientesWritePolicy";
 
