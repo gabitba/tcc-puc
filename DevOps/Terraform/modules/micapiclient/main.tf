@@ -7,9 +7,8 @@ resource "azuread_service_principal" "msgraph" {
   use_existing   = true
 }
 
-resource "azuread_service_principal" "mic_app" {
+data "azuread_service_principal" "mic_app" {
   application_id = var.micAppClientId
-  use_existing   = true
 }
 
 resource "azuread_application" "mic_app_read_client" {
@@ -32,10 +31,10 @@ resource "azuread_application" "mic_app_read_client" {
   }
 
   required_resource_access {
-    resource_app_id = azuread_service_principal.mic_app.application_id
+    resource_app_id = data.azuread_service_principal.mic_app.application_id
 
     resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["clientes.reader"]
+      id   = data.azuread_service_principal.mic_app.app_role_ids["clientes.reader"]
       type = "Role"
     }
   }
@@ -72,10 +71,10 @@ resource "azuread_application" "mic_app_write_client" {
   }
 
   required_resource_access {
-    resource_app_id = azuread_service_principal.mic_app.application_id
+    resource_app_id = data.azuread_service_principal.mic_app.application_id
 
     resource_access {
-      id   = azuread_service_principal.mic_app.app_role_ids["clientes.writer"]
+      id   = data.azuread_service_principal.mic_app.app_role_ids["clientes.writer"]
       type = "Role"
     }
   }

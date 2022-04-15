@@ -2,9 +2,8 @@ data "azuread_client_config" "current" {}
 
 data "azuread_application_published_app_ids" "well_known" {}
 
-resource "azuread_service_principal" "msgraph" {
+data "azuread_service_principal" "msgraph" {
   application_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
-  use_existing   = true
 }
 
 resource "azuread_application" "mic_app" {
@@ -22,12 +21,12 @@ resource "azuread_application" "mic_app" {
     resource_app_id = data.azuread_application_published_app_ids.well_known.result.MicrosoftGraph
 
     resource_access {
-      id   = azuread_service_principal.msgraph.oauth2_permission_scope_ids["openid"]
+      id   = data.azuread_service_principal.msgraph.oauth2_permission_scope_ids["openid"]
       type = "Scope"
     }
 
     resource_access {
-      id   = azuread_service_principal.msgraph.oauth2_permission_scope_ids["User.Read"]
+      id   = data.azuread_service_principal.msgraph.oauth2_permission_scope_ids["User.Read"]
       type = "Scope"
     }
   }
@@ -73,7 +72,7 @@ resource "azuread_service_principal" "mic_app" {
 
 resource "azuread_service_principal_delegated_permission_grant" "mic_app" {
   service_principal_object_id          = azuread_service_principal.mic_app.object_id
-  resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
+  resource_service_principal_object_id = data.azuread_service_principal.msgraph.object_id
   claim_values                         = ["openid", "User.Read.All"]
 }
 
@@ -88,7 +87,7 @@ resource "azuread_user" "reader" {
 }
 
 resource "azuread_app_role_assignment" "reader" {
-  app_role_id         = azuread_service_principal.mic_app.app_role_ids["Clientes.Reader"]
+  app_role_id         = azuread_service_principal.mic_app.app_role_ids["clientes.reader"]
   principal_object_id = azuread_user.reader.object_id
   resource_object_id  = azuread_service_principal.mic_app.object_id
 }
@@ -100,7 +99,7 @@ resource "azuread_user" "writer" {
 }
 
 resource "azuread_app_role_assignment" "writer" {
-  app_role_id         = azuread_service_principal.mic_app.app_role_ids["Clientes.Writer"]
+  app_role_id         = azuread_service_principal.mic_app.app_role_ids["clientes.writer"]
   principal_object_id = azuread_user.writer.object_id
   resource_object_id  = azuread_service_principal.mic_app.object_id
 }

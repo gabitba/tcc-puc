@@ -56,16 +56,18 @@ resource "azurerm_log_analytics_workspace" "boaentrega" {
 }
 
 module "micapi" {
-  source             = "./modules/micapi"
-  companyName        = var.companyName
-  micAppName         = var.micAppName
+  source      = "./modules/micapi"
+  companyName = var.companyName
+  micAppName  = var.micAppName
 }
 
 module "micapiclient" {
-  source             = "./modules/micapiclient"
-  companyName        = var.companyName
-  micAppName         = var.micAppName
-  micAppClientId     = module.micapi.micAppApplicationClientId
+  source         = "./modules/micapiclient"
+  companyName    = var.companyName
+  micAppName     = var.micAppName
+  micAppClientId = module.micapi.micAppApplicationClientId
+
+  depends_on = [module.micapi]
 }
 
 module "apiboaentrega" {
