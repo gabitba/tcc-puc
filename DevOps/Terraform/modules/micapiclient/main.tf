@@ -45,6 +45,12 @@ resource "azuread_service_principal" "mic_app_read_client" {
   owners         = [data.azuread_client_config.current.object_id]
 }
 
+resource "azuread_app_role_assignment" "mic_app_read_client" {
+  app_role_id         = azuread_service_principal.mic_app.app_role_ids["clientes.reader"]
+  principal_object_id = azuread_service_principal.mic_app_read_client.object_id
+  resource_object_id  = azuread_service_principal.mic_app.object_id
+}
+
 resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client_msgraph" {
   service_principal_object_id          = azuread_service_principal.mic_app_read_client.object_id
   resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
@@ -83,6 +89,12 @@ resource "azuread_application" "mic_app_write_client" {
 resource "azuread_service_principal" "mic_app_write_client" {
   application_id = azuread_application.mic_app_write_client.application_id
   owners         = [data.azuread_client_config.current.object_id]
+}
+
+resource "azuread_app_role_assignment" "mic_app_write_client" {
+  app_role_id         = azuread_service_principal.mic_app.app_role_ids["clientes.reader"]
+  principal_object_id = azuread_service_principal.mic_app_write_client.object_id
+  resource_object_id  = azuread_service_principal.mic_app.object_id
 }
 
 resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client_msgraph" {
