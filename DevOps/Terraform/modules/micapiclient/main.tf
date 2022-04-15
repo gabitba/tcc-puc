@@ -52,12 +52,6 @@ resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_cl
   claim_values                         = ["openid", "User.Read.All"]
 }
 
-resource "azuread_service_principal_delegated_permission_grant" "mic_app_read_client_micapp" {
-  service_principal_object_id          = azuread_service_principal.mic_app_read_client.object_id
-  resource_service_principal_object_id = azuread_service_principal.mic_app.object_id
-  claim_values                         = ["clientes.reader"]
-}
-
 resource "azuread_application" "mic_app_write_client" {
   display_name     = "MIC App Client Writer"
   owners           = [data.azuread_client_config.current.object_id]
@@ -96,10 +90,4 @@ resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_c
   service_principal_object_id          = azuread_service_principal.mic_app_write_client.object_id
   resource_service_principal_object_id = azuread_service_principal.msgraph.object_id
   claim_values                         = ["openid", "User.Read.All"]
-}
-
-resource "azuread_service_principal_delegated_permission_grant" "mic_app_write_client_micapp" {
-  service_principal_object_id          = azuread_service_principal.mic_app_write_client.object_id
-  resource_service_principal_object_id = azuread_service_principal.mic_app.object_id
-  claim_values                         = ["clientes.writer"]
 }

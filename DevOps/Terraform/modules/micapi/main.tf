@@ -38,7 +38,7 @@ resource "azuread_application" "mic_app" {
     display_name         = "Ler dados de Clientes"
     enabled              = true
     id                   = "ad8af6cf-161e-4eae-bfce-b78845d6c904"
-    value                = "Clientes.Reader"
+    value                = "clientes.reader"
   }
 
   app_role {
@@ -47,7 +47,7 @@ resource "azuread_application" "mic_app" {
     display_name         = "Ler e escrever dados de Clientes."
     enabled              = true
     id                   = "b22a8058-8146-4aa9-a016-058fc6e5542c"
-    value                = "Clientes.Writer"
+    value                = "clientes.writer"
   }
 
   web {
