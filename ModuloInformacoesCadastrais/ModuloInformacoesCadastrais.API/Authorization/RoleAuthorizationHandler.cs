@@ -28,7 +28,11 @@ namespace ModuloInformacoesCadastrais.API.Authorization
         {
             if (user.HasClaim(c => possibleClaimNames.Contains(c.Type)))
             {
-                return user.Claims.First(c => possibleClaimNames.Contains(c.Type))!.Value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                var claims = user.Claims.FirstOrDefault(c => possibleClaimNames.Contains(c.Type))!.Value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                if(claims != null)
+                {
+                    return claims;
+                }
             }
 
             return Array.Empty<string>();
