@@ -44,6 +44,13 @@ namespace ModuloInformacoesCadastrais.API.OpenApi
                         Implicit = new OpenApiOAuthFlow
                         {
                             AuthorizationUrl = new Uri($"{authBaseUrl}/authorize"),
+                            Scopes = new Dictionary<string, string>
+                            {
+                                { $"{configuration["AzureAD:ClientId"]}/.default", "Default" },
+                            }
+                        },
+                        ClientCredentials = new OpenApiOAuthFlow
+                        {
                             TokenUrl = new Uri($"{authBaseUrl}/token"),
                             Scopes = new Dictionary<string, string>
                             {
