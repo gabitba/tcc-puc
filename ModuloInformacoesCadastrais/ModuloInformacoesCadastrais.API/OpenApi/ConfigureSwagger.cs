@@ -48,7 +48,7 @@ namespace ModuloInformacoesCadastrais.API.OpenApi
                             TokenUrl = new Uri($"{authBaseUrl}/token"),
                             Scopes = new Dictionary<string, string>
                             {
-                                { $"{configuration["AzureAD:ClientId"]}/.default", "Padrão" },
+                                { $"{configuration["AzureAD:ClientId"]}/.default", "Default" },
                             }
                         }
                     }
