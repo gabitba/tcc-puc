@@ -1,0 +1,620 @@
+{
+	"info": {
+		"_postman_id": "e3eba4fc-67a7-4ec3-b8f6-0659b066dc0a",
+		"name": "TCC-PUC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Acessar MIC pelo API Gateway com autenticação",
+			"item": [
+				{
+					"name": "Aplicação cliente autenticada",
+					"item": [
+						{
+							"name": "Listar clientes sem autorização",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "scope",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9/.default",
+											"type": "string"
+										},
+										{
+											"key": "clientSecret",
+											"value": "0z.7Q~OqAuHxJtg80Ix1WYhOymwc9tQBDNsZW",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "80190f4a-b4d6-4c30-8d36-eb1a53addfa3",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apimanagementApiUrl}}/v2/Clientes",
+									"host": [
+										"{{apimanagementApiUrl}}"
+									],
+									"path": [
+										"v2",
+										"Clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Listar clientes com autorização de leitura",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9/.default",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "3b2e17e9-19e3-4c5c-891d-8382b1c9fd36",
+											"type": "string"
+										},
+										{
+											"key": "clientSecret",
+											"value": "in67Q~5aIK7Odz5tMvCzb~2MUHB6UNx30pEr5",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/token",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apimanagementApiUrl}}/v2/Clientes",
+									"host": [
+										"{{apimanagementApiUrl}}"
+									],
+									"path": [
+										"v2",
+										"Clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar cliente sem autorização de escrita",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "scope",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9/.default",
+											"type": "string"
+										},
+										{
+											"key": "clientSecret",
+											"value": "0z.7Q~OqAuHxJtg80Ix1WYhOymwc9tQBDNsZW",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "80190f4a-b4d6-4c30-8d36-eb1a53addfa3",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Teste Postman\",\r\n  \"endereco\": \"Rua da Luca, 12314, Guarani\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apimanagementApiUrl}}/v2/Clientes",
+									"host": [
+										"{{apimanagementApiUrl}}"
+									],
+									"path": [
+										"v2",
+										"Clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar cliente com autorização de escrita",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "clientSecret",
+											"value": "D8d7Q~uQR6LueZ7rpoovw_Mor~6ZjfdxC-ZfQ",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "90247fc6-562d-48f6-afbd-ef1746ad214d",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9/.default",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "client_credentials",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Teste Postman\",\r\n  \"endereco\": \"Rua da Luca, 12314, Guarani\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apimanagementApiUrl}}/v2/Clientes",
+									"host": [
+										"{{apimanagementApiUrl}}"
+									],
+									"path": [
+										"v2",
+										"Clientes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Usuário autenticado",
+					"item": [
+						{
+							"name": "Listar clientes",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "authUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/authorize",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "implicit",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9/.default",
+											"type": "string"
+										},
+										{
+											"key": "clientSecret",
+											"value": "0z.7Q~OqAuHxJtg80Ix1WYhOymwc9tQBDNsZW",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{apimanagementApiUrl}}/v2/Clientes",
+									"host": [
+										"{{apimanagementApiUrl}}"
+									],
+									"path": [
+										"v2",
+										"Clientes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Criar cliente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "authUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/authorize",
+											"type": "string"
+										},
+										{
+											"key": "clientId",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9",
+											"type": "string"
+										},
+										{
+											"key": "grant_type",
+											"value": "implicit",
+											"type": "string"
+										},
+										{
+											"key": "scope",
+											"value": "f644d11b-6896-4a83-aade-80ce2b74f6b9/.default",
+											"type": "string"
+										},
+										{
+											"key": "clientSecret",
+											"value": "0z.7Q~OqAuHxJtg80Ix1WYhOymwc9tQBDNsZW",
+											"type": "string"
+										},
+										{
+											"key": "accessTokenUrl",
+											"value": "https://login.microsoftonline.com/b56bdd3f-e9bc-4072-bab4-2191ce42dc0e/oauth2/v2.0/token",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"nome\": \"Teste Postman\",\r\n  \"endereco\": \"Rua da Luca, 12314, Guarani\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{apimanagementApiUrl}}/v2/Clientes",
+									"host": [
+										"{{apimanagementApiUrl}}"
+									],
+									"path": [
+										"v2",
+										"Clientes"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Acessar MIC pelo API sem autenticação",
+			"item": [
+				{
+					"name": "Listar clientes sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 403\", function () {\r",
+									"    pm.response.to.have.status(403);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{apimanagementApiUrl}}/v2/Clientes",
+							"host": [
+								"{{apimanagementApiUrl}}"
+							],
+							"path": [
+								"v2",
+								"Clientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "scope",
+				"value": "{{azureADAudienceAPI}}/{{azureADReadScope}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{azureADClientId}}",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "implicit",
+				"type": "string"
+			},
+			{
+				"key": "audience",
+				"value": {
+					"c60ddb6f-c8af-4c85-9b5d-9dfa2663cc63": "{{azureADAudience}}"
+				},
+				"type": "any"
+			},
+			{
+				"key": "tokenName",
+				"value": "Azure AD Token",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "authUrl",
+				"value": "{{azureADBaseUrl}}/{{azureADTenant}}/oauth2/v2.0/authorize",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{azureADBaseUrl}}/{{azureADTenant}}/oauth2/v2.0/access_token",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "micApiUrl",
+			"value": "https://moduloinformacoescadastraisapi.azurewebsites.net/api",
+			"type": "string"
+		},
+		{
+			"key": "apimanagementApiUrl",
+			"value": "https://apiboaentrega.azure-api.net/mic/api",
+			"type": "string"
+		},
+		{
+			"key": "azureADBaseUrl",
+			"value": "https://login.microsoftonline.com",
+			"type": "string"
+		},
+		{
+			"key": "azureADTenant",
+			"value": "b56bdd3f-e9bc-4072-bab4-2191ce42dc0e",
+			"type": "string"
+		},
+		{
+			"key": "azureADClientId",
+			"value": "2ce18108-5a0f-450c-addd-3045be68b24d",
+			"type": "string"
+		},
+		{
+			"key": "azureADAudience",
+			"value": "2ce18108-5a0f-450c-addd-3045be68b24d",
+			"type": "string"
+		},
+		{
+			"key": "azureADAudienceAPI",
+			"value": "api://boaentrega-micapi",
+			"type": "string"
+		},
+		{
+			"key": "azureADReadScope",
+			"value": "Client.Read",
+			"type": "string"
+		},
+		{
+			"key": "azureADWriteScope",
+			"value": "Client.Write",
+			"type": "string"
+		}
+	]
+}
