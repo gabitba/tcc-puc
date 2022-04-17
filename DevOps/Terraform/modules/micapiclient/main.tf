@@ -92,7 +92,7 @@ resource "azuread_service_principal" "mic_app_write_client" {
 }
 
 resource "azuread_app_role_assignment" "mic_app_write_client" {
-  app_role_id         = data.azuread_service_principal.mic_app.app_role_ids["clientes.reader"]
+  app_role_id         = data.azuread_service_principal.mic_app.app_role_ids["clientes.writer"]
   principal_object_id = azuread_service_principal.mic_app_write_client.object_id
   resource_object_id  = data.azuread_service_principal.mic_app.object_id
 }
